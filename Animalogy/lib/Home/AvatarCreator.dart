@@ -2,7 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Dashboard.dart';
 import 'package:fluttermoji/fluttermoji.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AvatarCreator extends StatefulWidget {
   const AvatarCreator({Key? key}) : super(key: key);
@@ -15,11 +15,21 @@ class _AvatarCreatorState extends State<AvatarCreator> {
 
   late ConfettiController _controller;
 
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'avatarCreator');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
   @override
   void initState() {
     _controller = ConfettiController(duration: const Duration(seconds: 4));
     _controller.play();
     super.initState();
+
+    //  storing to localdata
+    storePageData();
   }
 
   @override
@@ -34,7 +44,7 @@ class _AvatarCreatorState extends State<AvatarCreator> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text("Create your Avatar", style: TextStyle(color: Colors.black),),
+        title: const Text("Create your Avatar", style: TextStyle(color: Colors.black),),
         centerTitle: true,
         leading: Builder(
           builder: (context) => IconButton(
@@ -75,7 +85,7 @@ class _AvatarCreatorState extends State<AvatarCreator> {
                   // scaffoldWidth: min(600, _width * 0.85),
                   autosave: false,
                   theme: FluttermojiThemeData(
-                      boxDecoration: BoxDecoration(boxShadow: [BoxShadow()])),
+                      boxDecoration: const BoxDecoration(boxShadow: [BoxShadow()])),
                 ),
               ),
             ],

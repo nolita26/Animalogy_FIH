@@ -1,6 +1,8 @@
-import 'package:animalogy/Story1/StoryP5.dart';
+import 'package:animalogy/Story2/BeginStory2.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StoryQuizAns extends StatefulWidget {
   const StoryQuizAns({Key? key}) : super(key: key);
@@ -12,15 +14,39 @@ class StoryQuizAns extends StatefulWidget {
 class _StoryQuizAnsState extends State<StoryQuizAns> {
 
   @override
+  void initState() {
+    super.initState();
+
+    //  storing to localdata
+    storePageData();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'storyQuizAns');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kContainerColor,
-      body: GestureDetector(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const StoryP5()));
-        },
-        child: Center(
+      body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -28,7 +54,7 @@ class _StoryQuizAnsState extends State<StoryQuizAns> {
               Text("Correct Answer!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
               SizedBox(height: 30,),
               Image.asset('assets/Map_Ans.png', fit: BoxFit.fill,),
-              SizedBox(height: 50,),
+              SizedBox(height: 40,),
               Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
               SizedBox(height: 15,),
               Row(
@@ -113,15 +139,32 @@ class _StoryQuizAnsState extends State<StoryQuizAns> {
                   ),
                   Spacer(flex: 2),
                 ],
-              )
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const BeginStoryP2()));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const <Widget>[
+                    Text(
+                      'Next',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(Icons.arrow_forward_rounded, color: Colors.black,),
+                  ],
+                ),
+              ),
             ],
           )
-          // child: RotatedBox(
-          //   quarterTurns:3,
-          //   child:
-          // ),
         ),
-      ),
     );
   }
 }

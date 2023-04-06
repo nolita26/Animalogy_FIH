@@ -1,7 +1,7 @@
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/HomePage.dart';
-import 'package:fluttermoji/fluttermoji.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -13,6 +13,20 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
 
   TextEditingController nameController = TextEditingController();
+
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'firstPage');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    //  storing to localdata
+    storePageData();
+  }
 
   @override
   void dispose() {
@@ -55,7 +69,6 @@ class _FirstPageState extends State<FirstPage> {
                   onTap: () {
                     Navigator.push(context,
                         new MaterialPageRoute(builder: (context) => HomePage(nameController.text)));
-                    // login();
                   },
                   borderRadius: BorderRadius.circular(30),
                   splashColor: kThemeColor,
@@ -69,7 +82,7 @@ class _FirstPageState extends State<FirstPage> {
                     ),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
+                        children: const <Widget>[
                           Text(
                             'Next',
                             style: TextStyle(

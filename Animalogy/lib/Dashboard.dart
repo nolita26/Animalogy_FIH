@@ -2,7 +2,9 @@ import 'package:animalogy/ThemeColor.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/StoryFirst.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttermoji/fluttermoji.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -14,19 +16,38 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
 
   // late ConfettiController _controller;
-  //
-  // @override
-  // void initState() {
-  //   _controller = ConfettiController(duration: const Duration(seconds: 5));
-  //   _controller.play();
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
+
+  @override
+  void initState() {
+    super.initState();
+    // _controller = ConfettiController(duration: const Duration(seconds: 5));
+    //   _controller.play();
+
+    //  storing to localdata
+    storePageData();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'dashboard');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
+  @override
+  void dispose() {
+    //   _controller.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +65,8 @@ class _DashboardState extends State<Dashboard> {
                 //   numberOfParticles: 50,
                 //   gravity: 0.05,
                 //   shouldLoop: true,
-                //   colors: const [
-                //     Colors.green,
-                //     Colors.blue,
-                //     Colors.pink,
-                //     Colors.orange,
-                //     Colors.purple
-                //   ], // manually specify the colors to be used
-                // ),
+                //   colors: const [Colors.green, Colors.blue, Colors.pink, Colors.orange, Colors.purple]
+                // ), // manually specify the colors to be used
                   SizedBox(height: 80,),
                   Text("Welcome to", textAlign: TextAlign.center, style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: kPurpleColor),),
                   SizedBox(height: 10,),
@@ -64,8 +79,7 @@ class _DashboardState extends State<Dashboard> {
                   SizedBox(height: 50,),
                   InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            new MaterialPageRoute(builder: (context) => StoryFirst()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoryFirst()));
                       },
                       borderRadius: BorderRadius.circular(30),
                       splashColor: kThemeColor,

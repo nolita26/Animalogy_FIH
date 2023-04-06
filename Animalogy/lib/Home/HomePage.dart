@@ -2,25 +2,36 @@ import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/AvatarCreator.dart';
 import 'package:fluttermoji/fluttermoji.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   final String name;
   HomePage(this.name);
-  // const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'homePage');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    //  storing to localdata
+    storePageData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFf9f5f1),
-        // appBar: AppBar(
-        //   backgroundColor: Color(0xFFf9f5f1),
-        //   elevation: 0,
-        // ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -50,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: 20,),
                     Padding(
-                        padding: EdgeInsets.only(left: 20, right: 30),
+                      padding: EdgeInsets.only(left: 20, right: 30),
                       child: Text("Make an animated version of yourself to enjoy the learning!", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal, color: Colors.black54),),
                     ),
                     SizedBox(height: 35,),
@@ -62,10 +73,7 @@ class _HomePageState extends State<HomePage> {
                           child: FloatingActionButton.extended(
                             label: Text("Let's get started", style: TextStyle(fontSize: 17, fontStyle: FontStyle.normal),),
                             backgroundColor: Colors.black,
-                            icon: Icon(
-                              Icons.edit,
-                              size: 26.0,
-                            ),
+                            icon: Icon(Icons.edit, size: 26.0),
                             onPressed: () => Navigator.push(context,
                                 new MaterialPageRoute(builder: (context) => AvatarCreator())),
                           ),
