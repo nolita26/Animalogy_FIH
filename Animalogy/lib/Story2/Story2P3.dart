@@ -44,7 +44,7 @@ class _Story2P3State extends State<Story2P3> {
 
   Future<void> play() async {
     await player.setAsset(
-        'assets/audio/4.m4a');
+        'assets/audio/12.wav');
     player.play();
     setState(() {
       playing = true;
@@ -53,7 +53,7 @@ class _Story2P3State extends State<Story2P3> {
 
   Future<void> pause() async {
     await player.setAsset(
-        'assets/audio/4.m4a');
+        'assets/audio/12.wav');
     player.pause();
     setState(() {
       playing = false;

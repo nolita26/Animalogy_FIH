@@ -33,7 +33,7 @@ class _Story2P8State extends State<Story2P8> with TickerProviderStateMixin {
     //  storing to localdata
     storePageData();
 
-    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 5));
     animation = Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
       ..addListener(() {
         setState(() {

@@ -2,6 +2,8 @@ import 'package:animalogy/Story3/ChatMessageModel.dart';
 import 'package:animalogy/FadeAnimation.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -11,6 +13,9 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+
+  late double width;
+  late double height;
 
   final String _user = "Jack";
   final String _message ="";
@@ -27,6 +32,11 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     // TODO: implement initState
+    storePageData();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     allOptions = [
       [
         ChatMessagePromptOptions(option: "A", prompt: "Yes I am interested, please tell me more!",
@@ -279,6 +289,14 @@ class _ChatPageState extends State<ChatPage> {
 
     super.initState();
   }
+
+  Future<void> storePageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentPage', 'chatPage');
+    final String? action = prefs.getString('currentPage');
+    print(action);
+  }
+
   void setMessage(ChatMessage message){
     setState(() {
       // conversationCount++;
@@ -333,7 +351,18 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
