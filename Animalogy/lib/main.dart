@@ -33,6 +33,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animalogy/Home/StoryFirst.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,6 +48,9 @@ class _MyAppState extends State<MyApp> {
 
   String? currentPage = '';
   Widget showPage = Text('');
+
+  late double width;
+  late double height;
 
   @override
   void initState() {
@@ -238,17 +242,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Animalogy',
-      home: AnimatedSplashScreen(
-        backgroundColor: Color(0xFFf9f5f1),
-        splashIconSize: 80,
-        splash: 'assets/logo.png',
-        nextScreen: currentPage != null ? showPage : const FirstPage() ,
-        splashTransition: SplashTransition.fadeTransition,
-        duration: 3000,
-      ),
-    );
+    return Sizer(
+        builder: (context, orientation, deviceType){
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Animalogy',
+        home: AnimatedSplashScreen(
+          backgroundColor: Color(0xFFf9f5f1),
+          splashIconSize: 80,
+          splash: 'assets/logo.png',
+          nextScreen: currentPage != null ? showPage : const FirstPage(),
+          splashTransition: SplashTransition.fadeTransition,
+          duration: 3000,
+        ),
+      );
+
+  });
   }
 }

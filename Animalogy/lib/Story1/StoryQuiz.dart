@@ -20,14 +20,14 @@ class _StoryQuizState extends State<StoryQuiz> {
   late double width;
   late double height;
   late AudioPlayer player;
-  bool playing = false;
+/*  bool playing = false;*/
 
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer();
+    /*player = AudioPlayer();
     play();
-    playing = true;
+    playing = true;*/
 
     //  storing to localdata
     storePageData();
@@ -45,7 +45,7 @@ class _StoryQuizState extends State<StoryQuiz> {
     print(action);
   }
 
-  Future<void> play() async {
+/*  Future<void> play() async {
     await player.setAsset(
         'assets/audio/10.m4a');
     player.play();
@@ -77,11 +77,13 @@ class _StoryQuizState extends State<StoryQuiz> {
     else{
       resume();
     }
-  }
+  }*/
 
   @override
   void dispose() {
+/*
     player.dispose();
+*/
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

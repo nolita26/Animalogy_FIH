@@ -19,6 +19,7 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
 
   late double width;
   late double height;
+
   late AudioPlayer player;
   bool playing = false;
   bool animate = false;
@@ -102,8 +103,8 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kContainerColor,
       body: Column(
@@ -111,14 +112,14 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
           children: [
             Stack(
                 children: <Widget>[
-                  const AspectRatio(
+                  AspectRatio(
                     aspectRatio: 3.77/2,
-                    child: Image(
-                          image: AssetImage('assets/Backgrounds/3.png'),
-                          alignment: Alignment.center,
-                          fit: BoxFit.fill
-                      ),
-                    ),
+                    child: const Image(
+                            image: AssetImage('assets/Backgrounds/3.png'),
+                            alignment: Alignment.center,
+                            fit: BoxFit.fill
+                        ),
+                  ),
                     Align(
                       alignment: const AlignmentDirectional(0,0.7),
                       child: Transform.translate(

@@ -12,6 +12,9 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
 
+  late double width;
+  late double height;
+
   TextEditingController nameController = TextEditingController();
 
   Future<void> storePageData() async {
@@ -36,6 +39,8 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFf9f5f1),
