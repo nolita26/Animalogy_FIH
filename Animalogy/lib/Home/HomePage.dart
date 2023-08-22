@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/AvatarCreator.dart';
@@ -5,7 +7,7 @@ import 'package:fluttermoji/fluttermoji.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  final String name;
+  dynamic name;
   HomePage(this.name);
 
   @override

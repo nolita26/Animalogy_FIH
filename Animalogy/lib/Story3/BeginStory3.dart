@@ -1,4 +1,3 @@
-import 'package:animalogy/Story2/Story2P1.dart';
 import 'package:animalogy/Story3/ChatPage.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +79,7 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
                           onTap: () {
                             print("pressed!");
                             Navigator.push(context,
-                                new MaterialPageRoute(builder: (context) => ChatPage()));
+                                MaterialPageRoute(builder: (context) => ChatPage()));
                           },
                           child: Container(
                             height: 50,

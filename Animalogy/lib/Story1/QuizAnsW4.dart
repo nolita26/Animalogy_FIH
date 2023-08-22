@@ -50,7 +50,7 @@ class _QuizAnsW4State extends State<QuizAnsW4> {
                 SizedBox(height: 20,),
                 Text("Correct Answer!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
                 SizedBox(height: 30,),
-                Image.asset('assets/Map_Ans.png', fit: BoxFit.fill,),
+                Image.asset('assets/Map.png', fit: BoxFit.fill,),
                 SizedBox(height: 40,),
                 Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
                 SizedBox(height: 15,),

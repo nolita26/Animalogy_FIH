@@ -73,7 +73,7 @@ class _FirstPageState extends State<FirstPage> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => HomePage(nameController.text)));
+                        MaterialPageRoute(builder: (context) => HomePage(nameController.text)));
                   },
                   borderRadius: BorderRadius.circular(30),
                   splashColor: kThemeColor,

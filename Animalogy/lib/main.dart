@@ -219,16 +219,16 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         showPage = Story2P15();
       });
-    }else if (currentPage == 'beginstoryP3') {
+    }else {
       setState(() {
         showPage = BeginStoryP3();
       });
     }
-    else {
+    /*else {
       setState(() {
         showPage = ChatPage();
       });
-    }
+    }*/
   }
 
   @override
