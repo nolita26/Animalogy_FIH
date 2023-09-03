@@ -33,8 +33,10 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
     //  storing to localdata
     storePageData();
 
-    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 5));
-    animation = Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    animation =
+    Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
       ..addListener(() {
         setState(() {
           animate = true;
@@ -56,8 +58,7 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
   }
 
   Future<void> play() async {
-    await player.setAsset(
-        'assets/audio/15.mp3');
+    await player.setAsset('assets/audio/15.mp3');
     player.play();
     setState(() {
       playing = true;
@@ -65,8 +66,7 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
   }
 
   Future<void> pause() async {
-    await player.setAsset(
-        'assets/audio/15.mp3');
+    await player.setAsset('assets/audio/15.mp3');
     player.pause();
     setState(() {
       playing = false;
@@ -80,11 +80,10 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
     });
   }
 
-  void playPause(){
-    if(playing){
+  void playPause() {
+    if (playing) {
       pause();
-    }
-    else{
+    } else {
       resume();
     }
   }
@@ -109,20 +108,22 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Stack(
-              children: <Widget>[
-                const AspectRatio(
-                  aspectRatio: 3.77/2,
-                  child: Image(
-                      image: AssetImage('assets/Backgrounds/15.png'),
-                      alignment: Alignment.center,
-                      fit: BoxFit.fill
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0,0.7),
-                  child: Transform.translate(
-                    offset: const Offset(220, 230),
+          Stack(children: <Widget>[
+            const AspectRatio(
+              aspectRatio: 3.77 / 2,
+              child: Image(
+                  image: AssetImage('assets/Backgrounds/15.png'),
+                  alignment: Alignment.center,
+                  fit: BoxFit.fill),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0.7),
+              child: Transform.translate(
+                offset: const Offset(220, 230),
+                child: FadeTransition(
+                  opacity: animationController,
+                  child: ScaleTransition(
+                    scale: animationController,
                     child: Container(
                       height: 120,
                       width: 150,
@@ -133,7 +134,10 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                /*Align(
+              ),
+            ),
+
+            /*Align(
                       alignment: AlignmentDirectional.bottomStart,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -151,8 +155,7 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
                         ),),
                         ),
                       ),*/
-              ]
-          ),
+          ]),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -161,18 +164,21 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: kDefaultIconLightColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold)),
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   onPressed: () {
                     pause();
-                    Navigator.push(context, MaterialPageRoute(builder:(context)=> Story2P5()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Story2P5()));
                   },
-                  child: const Text('Previous',
+                  child: const Text(
+                    'Previous',
                     style: TextStyle(
                       color: Colors.black,
-                    ),),
+                    ),
+                  ),
                 ),
               ),
               Align(
@@ -181,26 +187,36 @@ class _Story2P6State extends State<Story2P6> with TickerProviderStateMixin {
                     onPressed: () async {
                       playPause();
                     },
-                    icon: playing? Icon(Icons.pause, color: Colors.black,): Icon(Icons.play_arrow, color: Colors.black,)
-                ),
+                    icon: playing
+                        ? Icon(
+                      Icons.pause,
+                      color: Colors.black,
+                    )
+                        : Icon(
+                      Icons.play_arrow,
+                      color: Colors.black,
+                    )),
               ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: kDefaultIconLightColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold)),
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   onPressed: () {
                     pause();
-                    Navigator.push(context, MaterialPageRoute(builder:(context)=> Story2P7()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Story2P7()));
                   },
-                  child: const Text('Next',
+                  child: const Text(
+                    'Next',
                     style: TextStyle(
                       color: Colors.black,
-                    ),),
+                    ),
+                  ),
                 ),
               ),
             ],

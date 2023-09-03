@@ -1,5 +1,5 @@
+import 'package:animalogy/Home/NavigationPage.dart';
 import 'package:animalogy/Story1/Questions.dart';
-import 'package:animalogy/Story2/Story2P1.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,13 +61,13 @@ class _BeginStoryP2State extends State<BeginStoryP2> {
             children: <Widget>[
               Text("Let's begin with", textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),),
               SizedBox(height: 5,),
-              Text("Story 2!", textAlign: TextAlign.start, style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold, fontSize: 30),),
+              Text("Story 2!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
               SizedBox(height: 30,),
               Container(
                   padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: Colors.deepPurpleAccent
+                      color: kChatThemeColor,
                   ),
                   child: Column(
                     children: <Widget>[
@@ -75,7 +75,7 @@ class _BeginStoryP2State extends State<BeginStoryP2> {
                         "You have already met Meerkat and learned about his background in the first story. Now, let's meet Meerkat's friend, Drongo!",
                         style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 20),
                       InkWell(
                           onTap: () {
                             print("pressed!");
@@ -109,6 +109,41 @@ class _BeginStoryP2State extends State<BeginStoryP2> {
                           )
                       ),
                     ],
+                  )
+              ),
+              SizedBox(height: 40),
+              InkWell(
+                  onTap: () {
+                    print("pressed!");
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => NavigationPage()));
+                  },
+                  child: Center(
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: kYellowColor
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Dashboard",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),
+                          ),
+                          SizedBox(width: 12,),
+                          Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
+                        ],
+                      ),
+                    ),
                   )
               ),
             ],

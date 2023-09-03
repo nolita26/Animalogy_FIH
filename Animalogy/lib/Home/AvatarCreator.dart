@@ -52,7 +52,8 @@ class _AvatarCreatorState extends State<AvatarCreator> {
             iconSize: 22.0,
             color: Colors.black,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => Dashboard()));
             },
           ),
         ),

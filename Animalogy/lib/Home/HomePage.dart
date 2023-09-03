@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/AvatarCreator.dart';

@@ -1,11 +1,11 @@
 import 'package:animalogy/Story3/ChatMessageModel.dart';
+import 'package:animalogy/Story3/DarkPage.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 import '../Home/FirstPage.dart';
-import '../UserDataModel.dart';
 
 class ChatPage extends StatefulWidget {
   String username = '';
@@ -21,7 +21,6 @@ class _ChatPageState extends State<ChatPage> {
   bool playing = false;
 
   final String _user = "Jack";
-  final String _rec = "Naomi";
   final String _message = "";
   // int conversationCount = 0;
   Chat chat = Chat([]);
@@ -34,6 +33,16 @@ class _ChatPageState extends State<ChatPage> {
           messageType: "Test",
           leftSide: false,
           onTap: setMessage));
+    });
+  }
+
+  void shackle() {
+    setState(() async {
+      await player.setAsset('assets/audio/dark_sound.mp3');
+      player.play();
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => DarkPage()));
     });
   }
 
@@ -665,14 +674,7 @@ class _ChatPageState extends State<ChatPage> {
       ];
       chat.messages.addAll(newMessages);
     } else if (message.messageType == "D2" || message.messageType == "D3") {
-      List<ChatMessage> newMessages = [
-        StoryContainer(
-            messageContent:
-                "(Sound of shackles and a black screen is shown.) When your friend reach the house, they got drugged and kidnapped. You never heard from them again.",
-            messageType: "Test",
-            onTap: setMessage),
-      ];
-      chat.messages.addAll(newMessages);
+      shackle();
     }
   }
 

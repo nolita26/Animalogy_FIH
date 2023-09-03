@@ -1,7 +1,6 @@
+import 'package:animalogy/Home/NavigationPage.dart';
 import 'package:animalogy/ThemeColor.dart';
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:animalogy/Home/StoryFirst.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttermoji/fluttermoji.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -79,7 +78,7 @@ class _DashboardState extends State<Dashboard> {
                   SizedBox(height: 50,),
                   InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoryFirst()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationPage()));
                       },
                       borderRadius: BorderRadius.circular(30),
                       splashColor: kThemeColor,

@@ -1,22 +1,20 @@
 import 'package:animalogy/Home/NavigationPage.dart';
-import 'package:animalogy/Story3/ChatPage.dart';
+import 'package:animalogy/Home/StoryFirst.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BeginStoryP3 extends StatefulWidget {
-  const BeginStoryP3({Key? key}) : super(key: key);
+class BeginStoryP1 extends StatefulWidget {
+  const BeginStoryP1({Key? key}) : super(key: key);
 
   @override
-  State<BeginStoryP3> createState() => _BeginStoryP3State();
+  State<BeginStoryP1> createState() => _BeginStoryP1State();
 }
 
-class _BeginStoryP3State extends State<BeginStoryP3> {
-
+class _BeginStoryP1State extends State<BeginStoryP1> {
   late double width;
   late double height;
-  bool playing = false;
 
   @override
   void initState() {
@@ -32,7 +30,7 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
 
   Future<void> storePageData() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('currentPage', 'beginstoryP3');
+    await prefs.setString('currentPage', 'beginstoryP1');
     final String? action = prefs.getString('currentPage');
     print(action);
   }
@@ -61,8 +59,8 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
             children: <Widget>[
               Text("Let's begin with", textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),),
               SizedBox(height: 5,),
-              Text("Story 3!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
-              SizedBox(height: 20,),
+              Text("Story 1!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
+              SizedBox(height: 30,),
               Container(
                   padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
                   decoration: BoxDecoration(
@@ -72,15 +70,15 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "Someone sends you a message on Facebook. You don’t know them and have never seen them, but they claim to be from your neighborhood. They explain they are a Tik Tok influencer and would like to invite you to have you in their next dance video.",
+                        "Let's meet our first character and learn about her life and background!",
                         style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 20),
                       InkWell(
                           onTap: () {
                             print("pressed!");
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => ChatPage()));
+                                new MaterialPageRoute(builder: (context) => StoryFirst()));
                           },
                           child: Container(
                             height: 50,
@@ -111,7 +109,7 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
                     ],
                   )
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               InkWell(
                   onTap: () {
                     print("pressed!");

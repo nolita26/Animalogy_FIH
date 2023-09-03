@@ -1,4 +1,4 @@
-import 'package:animalogy/Dashboard.dart';
+import 'package:animalogy/Story1/BeginStory1.dart';
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/StorySecond.dart';
@@ -118,7 +118,7 @@ class _StoryFirstState extends State<StoryFirst> {
                               fontWeight: FontWeight.bold)),
                       onPressed: () {
                         pause();
-                        Navigator.push(context, MaterialPageRoute(builder:(context)=> Dashboard()));
+                        Navigator.push(context, MaterialPageRoute(builder:(context)=> BeginStoryP1()));
                       },
                       child: const Text('Previous',
                         style: TextStyle(

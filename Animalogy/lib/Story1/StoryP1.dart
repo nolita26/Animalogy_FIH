@@ -34,8 +34,16 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
     //  storing to localdata
     storePageData();
 
-    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    animation = Tween<double>(begin: 0.0, end: -300.0).animate(animationController)
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+
+    // animation =
+    //     CurvedAnimation(parent: animationController, curve: Curves.elasticOut);
+
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    animation =
+    Tween<double>(begin: 0.0, end: -300.0).animate(animationController)
       ..addListener(() {
         setState(() {
           animate = true;
@@ -57,8 +65,7 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
   }
 
   Future<void> play() async {
-    await player.setAsset(
-        'assets/audio/3.m4a');
+    await player.setAsset('assets/audio/3.m4a');
     player.play();
     setState(() {
       playing = true;
@@ -66,8 +73,7 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
   }
 
   Future<void> pause() async {
-    await player.setAsset(
-        'assets/audio/3.m4a');
+    await player.setAsset('assets/audio/3.m4a');
     player.pause();
     setState(() {
       playing = false;
@@ -81,11 +87,10 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
     });
   }
 
-  void playPause(){
-    if(playing){
+  void playPause() {
+    if (playing) {
       pause();
-    }
-    else{
+    } else {
       resume();
     }
   }
@@ -108,33 +113,38 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: kContainerColor,
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Stack(
-                children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 3.77/2,
-                    child: const Image(
-                            image: AssetImage('assets/Backgrounds/3.png'),
-                            alignment: Alignment.center,
-                            fit: BoxFit.fill
-                        ),
-                  ),
-                    Align(
-                      alignment: const AlignmentDirectional(0,0.7),
-                      child: Transform.translate(
-                        offset: const Offset(-150, 100),
-                        child: Container(
-                          height: 200,
-                          width: 220,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/Meerkat/Neutral-left.png'),
-                              )),
-                        ),
-                      ),
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Stack(children: <Widget>[
+            AspectRatio(
+              aspectRatio: 3.77 / 2,
+              child: const Image(
+                  image: AssetImage('assets/Backgrounds/3.png'),
+                  alignment: Alignment.center,
+                  fit: BoxFit.fill),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0.7),
+              child: Transform.translate(
+                offset: const Offset(-150, 100),
+                child: FadeTransition(
+                  opacity: animationController,
+                  child: ScaleTransition(
+                    scale: animationController,
+                    child: Container(
+                      height: 200,
+                      width: 220,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/Meerkat/Neutral-left.png'),
+                          )),
                     ),
-                    /*Align(
+                  ),
+                ),
+              ),
+            ),
+
+            /*Align(
                       alignment: AlignmentDirectional.bottomStart,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -152,62 +162,74 @@ class _StoryP1State extends State<StoryP1> with TickerProviderStateMixin {
                         ),),
                         ),
                       ),*/
-                ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: kDefaultIconLightColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      pause();
-                      Navigator.push(context, MaterialPageRoute(builder:(context)=> StorySecond()));
+          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: kDefaultIconLightColor,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    pause();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => StorySecond()));
+                  },
+                  child: const Text(
+                    'Previous',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: IconButton(
+                    onPressed: () async {
+                      playPause();
                     },
-                    child: const Text('Previous',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),),
+                    icon: playing
+                        ? Icon(
+                      Icons.pause,
+                      color: Colors.black,
+                    )
+                        : Icon(
+                      Icons.play_arrow,
+                      color: Colors.black,
+                    )),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: kDefaultIconLightColor,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    pause();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => StoryP2()));
+                  },
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: IconButton(
-                      onPressed: () async {
-                        playPause();
-                      },
-                      icon: playing? Icon(Icons.pause, color: Colors.black,): Icon(Icons.play_arrow, color: Colors.black,)
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: kDefaultIconLightColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      pause();
-                      Navigator.push(context, MaterialPageRoute(builder:(context)=> StoryP2()));
-                    },
-                    child: const Text('Next',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

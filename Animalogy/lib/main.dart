@@ -1,33 +1,11 @@
 import 'package:animalogy/Dashboard.dart';
 import 'package:animalogy/Home/AvatarCreator.dart';
 import 'package:animalogy/Home/FirstPage.dart';
-import 'package:animalogy/Home/StorySecond.dart';
-import 'package:animalogy/Story1/Questions.dart';
-import 'package:animalogy/Story1/StoryP1.dart';
-import 'package:animalogy/Story1/StoryP2.dart';
-import 'package:animalogy/Story1/StoryP3.dart';
-import 'package:animalogy/Story1/StoryP4.dart';
-import 'package:animalogy/Story1/StoryP5.dart';
-import 'package:animalogy/Story1/StoryP6.dart';
-import 'package:animalogy/Story1/StoryQuiz.dart';
+import 'package:animalogy/Home/HomePage.dart';
+import 'package:animalogy/Home/NavigationPage.dart';
+import 'package:animalogy/Story1/BeginStory1.dart';
 import 'package:animalogy/Story2/BeginStory2.dart';
-import 'package:animalogy/Story2/Story2P1.dart';
-import 'package:animalogy/Story2/Story2P10.dart';
-import 'package:animalogy/Story2/Story2P11.dart';
-import 'package:animalogy/Story2/Story2P12.dart';
-import 'package:animalogy/Story2/Story2P13.dart';
-import 'package:animalogy/Story2/Story2P14.dart';
-import 'package:animalogy/Story2/Story2P15.dart';
-import 'package:animalogy/Story2/Story2P2.dart';
-import 'package:animalogy/Story2/Story2P3.dart';
-import 'package:animalogy/Story2/Story2P4.dart';
-import 'package:animalogy/Story2/Story2P5.dart';
-import 'package:animalogy/Story2/Story2P6.dart';
-import 'package:animalogy/Story2/Story2P7.dart';
-import 'package:animalogy/Story2/Story2P8.dart';
-import 'package:animalogy/Story2/Story2P9.dart';
 import 'package:animalogy/Story3/BeginStory3.dart';
-import 'package:animalogy/Story3/ChatPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +18,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  String username = '';
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -54,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    //widget.username = userDataModel.getUsername();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
@@ -73,11 +53,11 @@ class _MyAppState extends State<MyApp> {
       showPage = FirstPage();
       });
     }
-    /*else if (currentPage == 'homePage') {
+    else if (currentPage == 'homePage') {
       setState(() {
-        showPage = HomePage(name);
+        showPage = HomePage({widget.username});
       });
-    }*/
+    }
     else if (currentPage == 'avatarCreator') {
       setState(() {
         showPage = AvatarCreator();
@@ -88,53 +68,14 @@ class _MyAppState extends State<MyApp> {
         showPage = Dashboard();
       });
     }
-    else if (currentPage == 'storyFirst') {
+    else if (currentPage == 'navigationPage') {
       setState(() {
-        showPage = StoryFirst();
+        showPage = NavigationPage();
       });
     }
-    else if (currentPage == 'storySecond') {
+    else if (currentPage == 'beginstoryP1') {
       setState(() {
-        showPage = StorySecond();
-      });
-    }else if (currentPage == 'storyP1') {
-      setState(() {
-        showPage = StoryP1();
-      });
-    }
-    else if (currentPage == 'storyP2') {
-      setState(() {
-        showPage = StoryP2();
-      });
-    }
-    else if (currentPage == 'storyP3') {
-      setState(() {
-        showPage = StoryP3();
-      });
-    }
-    else if (currentPage == 'storyP4') {
-      setState(() {
-        showPage = StoryP4();
-      });
-    }
-    else if (currentPage == 'storyP5') {
-      setState(() {
-        showPage = StoryP5();
-      });
-    }
-    else if (currentPage == 'storyP6') {
-      setState(() {
-        showPage = StoryP6();
-      });
-    }
-    else if (currentPage == 'storyQuiz') {
-      setState(() {
-        showPage = StoryQuiz();
-      });
-    }
-    else if (currentPage == 'questions') {
-      setState(() {
-        showPage = Questions();
+        showPage = BeginStoryP1();
       });
     }
     else if (currentPage == 'beginstoryP2') {
@@ -142,93 +83,16 @@ class _MyAppState extends State<MyApp> {
         showPage = BeginStoryP2();
       });
     }
-    else if (currentPage == 'questions') {
-      setState(() {
-        showPage = Questions();
-      });
-    }
-    else if (currentPage == 'story2P1') {
-      setState(() {
-        showPage = Story2P1();
-      });
-    }
-    else if (currentPage == 'story2P2') {
-      setState(() {
-        showPage = Story2P2();
-      });
-    }
-    else if (currentPage == 'story2P3') {
-      setState(() {
-        showPage = Story2P3();
-      });
-    }
-    else if (currentPage == 'story2P4') {
-      setState(() {
-        showPage = Story2P4();
-      });
-    }
-    else if (currentPage == 'story2P5') {
-      setState(() {
-        showPage = Story2P5();
-      });
-    }
-    else if (currentPage == 'story2P6') {
-      setState(() {
-        showPage = Story2P6();
-      });
-    }
-    else if (currentPage == 'story2P7') {
-      setState(() {
-        showPage = Story2P7();
-      });
-    }
-    else if (currentPage == 'story2P8') {
-      setState(() {
-        showPage = Story2P8();
-      });
-    }
-    else if (currentPage == 'story2P9') {
-      setState(() {
-        showPage = Story2P9();
-      });
-    }
-    else if (currentPage == 'story2P10') {
-      setState(() {
-        showPage = Story2P10();
-      });
-    }
-    else if (currentPage == 'story2P11') {
-      setState(() {
-        showPage = Story2P11();
-      });
-    }else if (currentPage == 'story2P12') {
-      setState(() {
-        showPage = Story2P12();
-      });
-    }else if (currentPage == 'story2P13') {
-      setState(() {
-        showPage = Story2P13();
-      });
-    }
-    else if (currentPage == 'story2P14') {
-      setState(() {
-        showPage = Story2P14();
-      });
-    }
-    else if (currentPage == 'story2P15') {
-      setState(() {
-        showPage = Story2P15();
-      });
-    }else {
+    else if (currentPage == 'beginstoryP3') {
       setState(() {
         showPage = BeginStoryP3();
       });
     }
-    /*else {
+    else {
       setState(() {
-        showPage = ChatPage();
+        showPage = FirstPage();
       });
-    }*/
+    }
   }
 
   @override
