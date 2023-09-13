@@ -34,7 +34,7 @@ class _Story2P11State extends State<Story2P11> with TickerProviderStateMixin {
     storePageData();
 
     animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 9));
     animation =
     Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
       ..addListener(() {

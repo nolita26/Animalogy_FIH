@@ -89,8 +89,8 @@ class _StoryFirstState extends State<StoryFirst> {
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: kContainerColor,
         body:Column(

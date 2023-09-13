@@ -33,7 +33,7 @@ class _Story2P15State extends State<Story2P15> with TickerProviderStateMixin {
     //  storing to localdata
     storePageData();
 
-    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 4));
     animation = Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
       ..addListener(() {
         setState(() {
@@ -123,6 +123,10 @@ class _Story2P15State extends State<Story2P15> with TickerProviderStateMixin {
                   alignment: const AlignmentDirectional(0,0.7),
                   child: Transform.translate(
                     offset: const Offset(-150, 100),
+                    child: FadeTransition(
+                      opacity: animationController,
+                    child: ScaleTransition(
+                      scale: animationController,
                     child: Container(
                       height: 200,
                       width: 220,
@@ -130,6 +134,7 @@ class _Story2P15State extends State<Story2P15> with TickerProviderStateMixin {
                           image: DecorationImage(
                             image: AssetImage('assets/Drongo/Neutral-leftD.png'),
                           )),
+                    )),
                     ),
                   ),
                 ),

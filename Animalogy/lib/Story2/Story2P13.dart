@@ -34,7 +34,7 @@ class _Story2P13State extends State<Story2P13> with TickerProviderStateMixin {
     storePageData();
 
     animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 9));
     animation =
     Tween<double>(begin: 0.0, end: 300.0).animate(animationController)
       ..addListener(() {
@@ -131,6 +131,10 @@ class _Story2P13State extends State<Story2P13> with TickerProviderStateMixin {
                   alignment: const AlignmentDirectional(0, 0.7),
                   child: Transform.translate(
                     offset: const Offset(210, 240),
+                    child: FadeTransition(
+                      opacity: animationController,
+                    child: ScaleTransition(
+                      scale: animationController,
                     child: Container(
                       height: 110,
                       width: 220,
@@ -138,6 +142,7 @@ class _Story2P13State extends State<Story2P13> with TickerProviderStateMixin {
                           image: DecorationImage(
                             image: AssetImage('assets/Meerkat/Neutral.png'),
                           )),
+                    )),
                     ),
                   ),
                 ),
