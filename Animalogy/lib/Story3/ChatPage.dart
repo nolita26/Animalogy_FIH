@@ -188,21 +188,18 @@ class _ChatPageState extends State<ChatPage> {
             option: "C",
             prompt: "You don’t trust the person so you block them.",
             onTap: setMessage,
-            confirmMessage: ChatMessage(
-                messageContent: "Friend get trafficked",
+            confirmMessage: StoryContainer(
+                messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
                 messageType: "D",
-                leftSide: false,
                 onTap: setMessage))
       ], // convo if B1 chosen 2
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                " “Of course, it’s safe! I don’t want to keep the Tiktoker waiting so I’ll talk to you later.”",
+            prompt: "Of course, it’s safe! I don’t want to keep the Tiktoker waiting so I’ll talk to you later.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "(Sound of shackles and a black screen is shown.) When you have reached the house, they offer you a drink. After a few hours, you wake up in a dark room, and you realize you might have been drugged and kidnapped.",
+                messageContent: "",
                 messageType: "E",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -222,8 +219,7 @@ class _ChatPageState extends State<ChatPage> {
                 "You convince your friend to join you to the Tiktoker’s house as you tell them it’s safe to go there.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "(Sound of shackles and a black screen is shown.) When you have reached the house, they offer you a drink. After a few hours, you wake up in a dark room, and you realize you might have been drugged and kidnapped.",
+                messageContent: "",
                 messageType: "E",
                 onTap: setMessage))
       ], // convo if A2 chosen 3
@@ -254,18 +250,17 @@ class _ChatPageState extends State<ChatPage> {
             onTap: setMessage,
             confirmMessage: ChatMessage(
                 messageContent:
-                    "You notice that a lot of the followers of the Tiktoker’s account don’t have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning.",
+                    "You notice that a lot of the followers of the Tiktoker’s account don’t have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning. You decide to block them.",
                 messageType: "B4",
                 onTap: setMessage)),
-        ChatMessagePromptOptions(
+        /*ChatMessagePromptOptions(
             option: "D",
             prompt: "You notice this is sketchy and decide to block them.",
             onTap: setMessage,
-            confirmMessage: ChatMessage(
-                messageContent: "Friend get trafficked",
+            confirmMessage: StoryContainer(
+                messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
                 messageType: "D",
-                leftSide: false,
-                onTap: setMessage))
+                onTap: setMessage))*/
       ], // convo if B2 chosen 4
       [
         ChatMessagePromptOptions(
@@ -292,10 +287,9 @@ class _ChatPageState extends State<ChatPage> {
             option: "C",
             prompt: "You don’t trust the person so you block them.",
             onTap: setMessage,
-            confirmMessage: ChatMessage(
-                messageContent: "Friend get trafficked",
+            confirmMessage: StoryContainer(
+                messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
                 messageType: "D",
-                leftSide: false,
                 onTap: setMessage))
       ], // convo if C chosen 5
       [
@@ -320,12 +314,11 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
-            prompt: " You notice this is sketchy and decide to block them.",
+            prompt: "You notice this is sketchy and decide to block them.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "You notice this is sketchy and decide to block them. Friend gets trafficked.",
-                messageType: "B24",
+                messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
+                messageType: "D",
                 onTap: setMessage))
       ], // convo if B3 chosen 6
       [
@@ -354,8 +347,8 @@ class _ChatPageState extends State<ChatPage> {
             prompt:
                 "You listen to your parents and decide to block the person.",
             onTap: setMessage,
-            confirmMessage: ChatMessage(
-                messageContent: "Friend gets trafficked!",
+            confirmMessage: StoryContainer(
+                messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
                 messageType: "D",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -364,8 +357,7 @@ class _ChatPageState extends State<ChatPage> {
                 "You ignore your parent's advice and go to the TikToker's house.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "(Sound of shackles and a black screen is shown.) When you have reached the house, they offer you a drink. After a few hours, you wake up in a dark room, and you realize you might have been drugged and kidnapped.",
+                messageContent: "",
                 messageType: "E",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -412,13 +404,11 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "Your friend convinces you that the TikToker is to be trusted, they assure you that nothing bad will happen.",
+            prompt: "Your friend convinces you that the TikToker is to be trusted, they assure you that nothing bad will happen.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "(Sound of shackles and a black screen is shown.) When you and your friend reach the house, they offer you a drink. After a few hours, you and your friend wake up in a dark room, and you realize you might have been drugged and kidnapped.",
-                messageType: "F",
+                messageContent: "",
+                messageType: "E",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
@@ -617,13 +607,13 @@ class _ChatPageState extends State<ChatPage> {
       chat.messages.addAll(newMessages);
     } else if (message.messageType == "B4") {
       List<ChatMessage> newMessages = [
-        StoryContainer(
+/*        StoryContainer(
             messageContent:
                 "You notice this is sketchy and decide to block them.",
             messageType: "Test",
-            onTap: setMessage),
-        ChatMessage(
-            messageContent: "Friend gets trafficked",
+            onTap: setMessage),*/
+        StoryContainer(
+            messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
             messageType: "Test",
             onTap: setMessage),
       ];
@@ -645,11 +635,6 @@ class _ChatPageState extends State<ChatPage> {
       chat.messages.addAll(newMessages);
     } else if (message.messageType == "D") {
       List<ChatMessage> newMessages = [
-        StoryContainer(
-            messageContent:
-                "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
-            messageType: "Test",
-            onTap: setMessage),
         ChatMessagePromp(
           messageContent: "Select one of the options",
           messageType: "Test",
@@ -658,13 +643,8 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ];
       chat.messages.addAll(newMessages);
-    } else if (message.messageType == "D1") {
+    } /*else if (message.messageType == "D1") {
       List<ChatMessage> newMessages = [
-        StoryContainer(
-            messageContent:
-                "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
-            messageType: "Test",
-            onTap: setMessage),
         ChatMessagePromp(
           messageContent: "Select one of the options",
           messageType: "Test",
@@ -672,8 +652,8 @@ class _ChatPageState extends State<ChatPage> {
           onTap: setMessage,
         ),
       ];
-      chat.messages.addAll(newMessages);
-    } else if (message.messageType == "D2" || message.messageType == "D3") {
+      chat.messages.addAll(newMessages);}*/
+     else if (message.messageType == "D2" || message.messageType == "D3" || message.messageType == "E") {
       shackle();
     }
   }

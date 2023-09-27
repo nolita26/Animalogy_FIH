@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:animalogy/Home/StoryFirst.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -88,7 +87,7 @@ class _MyAppState extends State<MyApp> {
         showPage = BeginStoryP3();
       });
     }
-    else {
+   else {
       setState(() {
         showPage = FirstPage();
       });

@@ -115,11 +115,11 @@
 //   }
 // }
 
+import 'package:animalogy/Home/NavigationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttermoji/fluttermoji.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:animalogy/Home/StoryFirst.dart';
 import 'package:animalogy/ThemeColor.dart';
 
 class Dashboard extends StatelessWidget {
@@ -170,7 +170,7 @@ class Dashboard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => StoryFirst()),
+                  MaterialPageRoute(builder: (context) => NavigationPage()),
                 );
               },
               borderRadius: BorderRadius.circular(30),
