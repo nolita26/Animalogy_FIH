@@ -18,7 +18,7 @@ dependencies:
   shared_preferences: ^2.0.18
   sizer: ^2.0.15
   flutter_screenutil: ^5.7.0
-  simple_animations: ^4.2.0
+  simple_animations: ^5.0.2
   provider: ^6.0.0
   animated_text_kit: ^4.2.1
 
