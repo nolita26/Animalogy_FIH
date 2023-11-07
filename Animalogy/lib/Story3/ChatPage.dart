@@ -1,3 +1,4 @@
+import 'package:animalogy/Story3/BeginStory3.dart';
 import 'package:animalogy/Story3/ChatMessageModel.dart';
 import 'package:animalogy/Story3/DarkPage.dart';
 import 'package:animalogy/ThemeColor.dart';
@@ -15,6 +16,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+
   late double width;
   late double height;
   late AudioPlayer player;
@@ -38,11 +40,7 @@ class _ChatPageState extends State<ChatPage> {
 
   void shackle() {
     setState(() async {
-      await player.setAsset('assets/audio/dark_sound.mp3');
-      player.play();
-      Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => DarkPage()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DarkPage()));
     });
   }
 
@@ -80,29 +78,30 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     // TODO: implement initState
-
     widget.username = userDataModel.getUsername();
-
     player = AudioPlayer();
     play();
     playing = true;
+
     //  storing to localdata
     storePageData();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     allOptions = [
       [
         ChatMessagePromptOptions(
-          option: "A", prompt: "Yes I am interested, please tell me more!",
+          option: "A",
+          prompt: "Yes I am interested, please tell me more!",
           onTap: setMessage,
           confirmMessage: ChatMessage(
               messageContent: "Yes I am interested, please tell me more!",
               messageType: "A1",
               leftSide: false,
               onTap: setMessage),
-          // checkCen: ChatMessagePromp(checkCenter: false, messageContent: '', messageType: 'test', options: allOptions[])
         ),
         ChatMessagePromptOptions(
             option: "B",
@@ -118,8 +117,7 @@ class _ChatPageState extends State<ChatPage> {
             prompt: "You think - This look like a fake request",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
+                messageContent: "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
                 messageType: "C1",
                 onTap: setMessage))
       ], // option main
@@ -144,22 +142,18 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
-            prompt:
-                "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
+            prompt: "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
+                messageContent: "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
                 messageType: "A13",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "D",
-            prompt:
-                "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
+            prompt: "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
+                messageContent: "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
                 messageType: "A14", //"D2"
                 leftSide: false,
                 onTap: setMessage)),
@@ -176,12 +170,10 @@ class _ChatPageState extends State<ChatPage> {
                 leftSide: false)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
+            prompt: "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
+                messageContent: "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
                 messageType: "B2",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -204,19 +196,16 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You ask your friend: “What do you mean with it being a trap?”.",
+            prompt: "You ask your friend: “What do you mean with it being a trap?”.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "Sometimes there are fake accounts so you should make sure it is real and safe to go.",
+                messageContent: "Sometimes there are fake accounts so you should make sure it is real and safe to go.",
                 messageType: "A6",
                 leftSide: false,
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
-            prompt:
-                "You convince your friend to join you to the Tiktoker’s house as you tell them it’s safe to go there.",
+            prompt: "You convince your friend to join you to the Tiktoker’s house as you tell them it’s safe to go there.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
                 messageContent: "",
@@ -226,18 +215,15 @@ class _ChatPageState extends State<ChatPage> {
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                "You want to check if they are a real person so you video call them.",
+            prompt: "You want to check if they are a real person so you video call them.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "The TikToker does not engage in a video call with you and tells you they also can't at another time.",
+                messageContent: "The TikToker does not engage in a video call with you and tells you they also can't at another time.",
                 messageType: "B3",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "Since they have a lot of followers, you decide to go anyways",
+            prompt: "Since they have a lot of followers, you decide to go anyways",
             onTap: setMessage,
             confirmMessage: ChatMessage(
                 messageContent: "Awesome, I'm coming over now.",
@@ -249,8 +235,7 @@ class _ChatPageState extends State<ChatPage> {
             prompt: "You decide to further investigate their profiles",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You notice that a lot of the followers of the Tiktoker’s account don’t have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning. You decide to block them.",
+                messageContent: "You notice that a lot of the followers of the Tiktoker’s account don’t have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning. You decide to block them.",
                 messageType: "B4",
                 onTap: setMessage)),
         /*ChatMessagePromptOptions(
@@ -265,22 +250,18 @@ class _ChatPageState extends State<ChatPage> {
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                "You text back: “Awesome, I’m coming over now.” (continue from aa)",
+            prompt: "You text back: “Awesome, I’m coming over now.” (continue from aa)",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You are on your way to the Tiktoker’s house and meet a friend on the road. You inform your friend on where you’re going and the plans. Your friend asks you: “Do you think it’s safe to go there? Are you sure it’s not a trap?”.",
+                messageContent: "You are on your way to the Tiktoker’s house and meet a friend on the road. You inform your friend on where you’re going and the plans. Your friend asks you: “Do you think it’s safe to go there? Are you sure it’s not a trap?”.",
                 messageType: "B11",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
+            prompt: "You check online whether this is a real Tik Tok influencer and look at their different social media profiles.",
             onTap: setMessage,
             confirmMessage: ChatMessage(
-                messageContent:
-                    "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
+                messageContent: "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
                 messageType: "B12",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -295,12 +276,10 @@ class _ChatPageState extends State<ChatPage> {
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                "Since they have a lot of followers, you decide to go anyway.",
+            prompt: "Since they have a lot of followers, you decide to go anyway.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "Since they have a lot of followers, you decide to go anyway.",
+                messageContent: "Since they have a lot of followers, you decide to go anyway.",
                 messageType: "A1",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -308,8 +287,7 @@ class _ChatPageState extends State<ChatPage> {
             prompt: "You decide to further investigate their profiles.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "You decide to further investigate their profiles. You notice that a lot of the followers of TikToker's account don't have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning.",
+                messageContent: "You notice that a lot of the followers of TikToker's account don't have any pictures or information. The account names are odd, having a lot of random letter combinations without any meaning.",
                 messageType: "B4",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -332,20 +310,17 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
+            prompt: "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
+                messageContent: "You inform your parents that a Tik Tok influencer has invited you to be in their next video and you ask your parents’ opinion about this.",
                 messageType: "A13",
                 onTap: setMessage)),
       ], // convo if A12 chosen 7
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                "You listen to your parents and decide to block the person.",
+            prompt: "You listen to your parents and decide to block the person.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
                 messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
@@ -353,8 +328,7 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You ignore your parent's advice and go to the TikToker's house.",
+            prompt: "You ignore your parent's advice and go to the TikToker's house.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
                 messageContent: "",
@@ -362,12 +336,10 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
-            prompt:
-                "You don't go to their house, but continue to have a conversation with them on instagram. You share funny TikTok videos with each other, and you figure out you have the same sense of humour. The two create a bond.",
+            prompt: "You don't go to their house, but continue to have a conversation with them on instagram. You share funny TikTok videos with each other, and you figure out you have the same sense of humour. The two create a bond.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "The TikToker invites you over to their house again to record a video with you",
+                messageContent: "The TikToker invites you over to their house again to record a video with you",
                 messageType: "A5",
                 onTap: setMessage)),
       ], // convo if A5 chosen 8
@@ -382,24 +354,20 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "B",
-            prompt:
-                "You check online whether this is a real TikTok influencer and look at their different social media profiles.",
+            prompt: "You check online whether this is a real TikTok influencer and look at their different social media profiles.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "You check online whether this is a real TikTok influencer and look at their different social media profiles.",
+                messageContent: "You check online whether this is a real TikTok influencer and look at their different social media profiles.",
                 messageType: "A14",
                 onTap: setMessage)),
       ], // convo if A13 chosen 9
       [
         ChatMessagePromptOptions(
             option: "A",
-            prompt:
-                "You warn your friend it's sketchy, and they should block the TikToker.",
+            prompt: "You warn your friend it's sketchy, and they should block the TikToker.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "Your friend does not listen to you and goes to the house of the TikToker.",
+                messageContent: "Your friend does not listen to you and goes to the house of the TikToker.",
                 messageType: "D2",
                 onTap: setMessage)),
         ChatMessagePromptOptions(
@@ -412,12 +380,10 @@ class _ChatPageState extends State<ChatPage> {
                 onTap: setMessage)),
         ChatMessagePromptOptions(
             option: "C",
-            prompt:
-                "Your advise your friend to tell their parents about the TikToker.",
+            prompt: "You advise your friend to tell their parents about the TikToker.",
             onTap: setMessage,
             confirmMessage: StoryContainer(
-                messageContent:
-                    "Your friend does not want to tell their parents and goes to the house of the TikToker.",
+                messageContent: "Your friend does not want to tell their parents and goes to the house of the TikToker.",
                 messageType: "D3",
                 onTap: setMessage)),
       ], // convo if D1 chosen 10
@@ -433,13 +399,11 @@ class _ChatPageState extends State<ChatPage> {
           messageType: "Test",
           onTap: setMessage),
       ChatMessage(
-          messageContent:
-              "You wouldn't know me but I live in your neighbourhood.",
+          messageContent: "You wouldn't know me but I live in your neighbourhood.",
           messageType: "Test",
           onTap: setMessage),
       ChatMessage(
-          messageContent:
-              "I saw your videos on Facebook and they are so amazing! I'm a TikTok influencer and would like to collaborate with you on my next video! Would you like to join?",
+          messageContent: "I saw your videos on Facebook and they are so amazing! I'm a TikTok influencer and would like to collaborate with you on my next video! Would you like to join?",
           messageType: "Test",
           onTap: setMessage),
       ChatMessagePromp(
@@ -465,12 +429,11 @@ class _ChatPageState extends State<ChatPage> {
       chat.messages.add(message);
       play();
     });
-    if (message.messageType == "A1") {
+    if(message.messageType == "A1") {
       play();
       List<ChatMessage> newMessages = [
         ChatMessage(
-            messageContent:
-                "That’s great, you can meet me at Shobhabazar and will record a Tik Tok video together.",
+            messageContent: "That’s great, you can meet me at Shobhabazar and will record a Tik Tok video together.",
             messageType: "Test",
             onTap: setMessage,
             leftSide: true),
@@ -486,8 +449,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         ChatMessage(
-            messageContent:
-                "From your profile I could see that you’re very talented and I want to give you the chance to also become a star.",
+            messageContent: "From your profile I could see that you’re very talented and I want to give you the chance to also become a star.",
             messageType: "test",
             leftSide: true,
             onTap: setMessage),
@@ -502,8 +464,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         ChatMessage(
-            messageContent:
-                "Yes! We will have other influencers present too, so you can socialize with them!",
+            messageContent: "Yes! We will have other influencers present too, so you can socialize with them!",
             messageType: "test",
             onTap: setMessage,
             leftSide: true),
@@ -519,8 +480,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         StoryContainer(
-            messageContent:
-                "Your parents do not allow you to go to a stranger's house, (add advice)",
+            messageContent: "Your parents do not allow you to go to a stranger's house, (add advice)",
             messageType: "test",
             onTap: setMessage),
         ChatMessagePromp(
@@ -535,8 +495,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         StoryContainer(
-            messageContent:
-                "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
+            messageContent: "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
             messageType: "Test",
             onTap: setMessage),
         ChatMessagePromp(
@@ -559,8 +518,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         StoryContainer(
-            messageContent:
-                "You check online whether this is a real TikTok influencer and look at their different social media profiles. You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral. ",
+            messageContent: "You check online whether this is a real TikTok influencer and look at their different social media profiles. You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral. ",
             messageType: "Test",
             onTap: setMessage),
         ChatMessagePromp(
@@ -574,8 +532,7 @@ class _ChatPageState extends State<ChatPage> {
       play();
       List<ChatMessage> newMessages = [
         StoryContainer(
-            messageContent:
-                "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
+            messageContent: "You notice that they have a lot of followers, but none of their videos have many views so haven’t gone viral.",
             messageType: "Test",
             onTap: setMessage),
         ChatMessagePromp(
@@ -616,13 +573,18 @@ class _ChatPageState extends State<ChatPage> {
             messageContent: "Soon after you have blocked the TikToker, your friend comes to you and tells you they have received a message from a TikToker, asking them to be in their video.",
             messageType: "Test",
             onTap: setMessage),
+        ChatMessagePromp(
+          messageContent: "Select one of the options",
+          messageType: "Test",
+          options: allOptions[10],
+          onTap: setMessage,
+        ),
       ];
       chat.messages.addAll(newMessages);
     } else if (message.messageType == "A11" || message.messageType == "A31") {
       List<ChatMessage> newMessages = [
         StoryContainer(
-            messageContent:
-                "You are on your way to the TikToker’s house and meet a friend on the road. You inform your friend on where you’re going and the plans. Your friend asks you: “Do you think it’s safe to go there? Are you sure it’s not a trap?”.",
+            messageContent: "You are on your way to the TikToker’s house and meet a friend on the road. You inform your friend on where you’re going and the plans. Your friend asks you: “Do you think it’s safe to go there? Are you sure it’s not a trap?”.",
             messageType: "Test",
             onTap: setMessage),
         ChatMessagePromp(
@@ -643,18 +605,20 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ];
       chat.messages.addAll(newMessages);
-    } /*else if (message.messageType == "D1") {
-      List<ChatMessage> newMessages = [
-        ChatMessagePromp(
-          messageContent: "Select one of the options",
-          messageType: "Test",
-          options: allOptions[10],
-          onTap: setMessage,
-        ),
-      ];
-      chat.messages.addAll(newMessages);}*/
+    }
+    //  else if (message.messageType == "D1") {
+    //   List<ChatMessage> newMessages = [
+    //     ChatMessagePromp(
+    //       messageContent: "Select one of the options",
+    //       messageType: "Test",
+    //       options: allOptions[10],
+    //       onTap: setMessage,
+    //     ),
+    //   ];
+    //   chat.messages.addAll(newMessages);}
      else if (message.messageType == "D2" || message.messageType == "D3" || message.messageType == "E") {
-      shackle();
+       pause();
+       shackle();
     }
   }
 
@@ -678,63 +642,39 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.white,
         flexibleSpace: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 16),
             child: Row(
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP3()));
                   },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: kChatThemeColor,
-                  ),
+                  icon: const Icon(Icons.arrow_back_ios, color: kChatThemeColor,),
                 ),
-                SizedBox(
-                  width: 2,
-                ),
+                const SizedBox(width: 2,),
                 const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://randomuser.me/api/portraits/men/5.jpg"),
+                  backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
                   maxRadius: 20,
                 ),
-                SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12,),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        '${_user}',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                      Text(_user,
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        "Online",
-                        style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 13),
+                      const SizedBox(height: 6,),
+                      Text("Online",
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
                       ),
                     ],
                   ),
                 ),
-                Icon(
-                  Icons.phone,
-                  color: kThemeCColor,
-                  size: 30,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Icon(
-                  Icons.videocam_rounded,
-                  color: kThemeCColor,
-                  size: 30,
-                ),
+                const Icon(Icons.phone, color: kThemeCColor, size: 30,),
+                const SizedBox(width: 15,),
+                const Icon(Icons.videocam_rounded, color: kThemeCColor, size: 30,),
               ],
             ),
           ),
@@ -744,13 +684,14 @@ class _ChatPageState extends State<ChatPage> {
         children: <Widget>[
           SingleChildScrollView(
               child: Padding(
-            padding: EdgeInsets.only(bottom: 80),
-            child: Column(children: chat.render()),
-          )),
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Column(children: chat.render()),
+              )
+          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
+              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
               height: 60,
               width: double.infinity,
               color: Colors.white,
@@ -765,16 +706,10 @@ class _ChatPageState extends State<ChatPage> {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      child: const Icon(Icons.add, color: Colors.white, size: 20,),
                     ),
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  const SizedBox(width: 15,),
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
@@ -786,20 +721,14 @@ class _ChatPageState extends State<ChatPage> {
                           border: InputBorder.none),
                     ),
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  const SizedBox(width: 15,),
                   FloatingActionButton(
                     onPressed: () {
                       send();
                     },
-                    child: Icon(
-                      Icons.send,
-                      color: Colors.white,
-                      size: 18,
-                    ),
                     backgroundColor: Colors.black,
                     elevation: 0,
+                    child: const Icon(Icons.send, color: Colors.white, size: 18,),
                   ),
                 ],
               ),

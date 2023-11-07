@@ -20,14 +20,10 @@ class _StoryQuizState extends State<StoryQuiz> {
   late double width;
   late double height;
   late AudioPlayer player;
-/*  bool playing = false;*/
 
   @override
   void initState() {
     super.initState();
-    /*player = AudioPlayer();
-    play();
-    playing = true;*/
 
     //  storing to localdata
     storePageData();
@@ -45,45 +41,8 @@ class _StoryQuizState extends State<StoryQuiz> {
     print(action);
   }
 
-/*  Future<void> play() async {
-    await player.setAsset(
-        'assets/audio/10.m4a');
-    player.play();
-    setState(() {
-      playing = true;
-    });
-  }
-
-  Future<void> pause() async {
-    await player.setAsset(
-        'assets/audio/10.m4a');
-    player.pause();
-    setState(() {
-      playing = false;
-    });
-  }
-
-  Future<void> resume() async {
-    player.play();
-    setState(() {
-      playing = true;
-    });
-  }
-
-  void playPause(){
-    if(playing){
-      pause();
-    }
-    else{
-      resume();
-    }
-  }*/
-
   @override
   void dispose() {
-/*
-    player.dispose();
-*/
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -93,6 +52,8 @@ class _StoryQuizState extends State<StoryQuiz> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kContainerColor,
       body: SingleChildScrollView(
@@ -100,16 +61,16 @@ class _StoryQuizState extends State<StoryQuiz> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 20,),
-                Text("Quiz Time!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
-                SizedBox(height: 30,),
+                SizedBox(height: height * 0.08,),
+                const Text("Quiz Time!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
+                const SizedBox(height: 30,),
                 Image.asset('assets/Map.png', fit: BoxFit.fill,),
-                SizedBox(height: 50,),
-                Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
-                SizedBox(height: 15,),
+                const SizedBox(height: 30,),
+                const Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
+                const SizedBox(height: 15,),
                 Row(
                   children: [
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     Expanded(
                       flex: 4,
                       child: OutlinedButton(
@@ -117,20 +78,19 @@ class _StoryQuizState extends State<StoryQuiz> {
                           primary: Colors.white,
                           backgroundColor: Colors.white,
                         ),
-                        child: Text("Region 1", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                        child: const Text("Region 1", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const QuizAnsW1()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW1()));
                         },
                       ),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     Expanded(
                       flex: 4,
                       child: OutlinedButton(
@@ -138,20 +98,20 @@ class _StoryQuizState extends State<StoryQuiz> {
                           primary: Colors.white,
                           backgroundColor: Colors.white,
                         ),
-                        child: Text("Region 2", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                        child: const Text("Region 2", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const StoryQuizAns()));
                         },
                       ),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     Expanded(
                       flex: 4,
                       child: OutlinedButton(
@@ -159,20 +119,19 @@ class _StoryQuizState extends State<StoryQuiz> {
                           primary: Colors.white,
                           backgroundColor: Colors.white,
                         ),
-                        child: Text("Region 3", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                        child: const Text("Region 3", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const QuizAnsW3()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW3()));
                         },
                       ),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     Expanded(
                       flex: 4,
                       child: OutlinedButton(
@@ -180,14 +139,13 @@ class _StoryQuizState extends State<StoryQuiz> {
                           primary: Colors.white,
                           backgroundColor: Colors.white,
                         ),
-                        child: Text("Region 4", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                        child: const Text("Region 4", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const QuizAnsW4()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW4()));
                         },
                       ),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                   ],
                 ),
               ],

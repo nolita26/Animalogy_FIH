@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/FadeAnimation.dart';
 import 'package:animalogy/ThemeColor.dart';
@@ -8,9 +7,9 @@ class Chat{
   Chat(this.messages);
   bool firstRender = true;
 
-  List<Widget> render(){
+  List<Widget> render() {
     double delay = 1;
-    if(firstRender){
+    if(firstRender) {
       firstRender = false;
       return messages.map((e) {
         delay++;
@@ -20,7 +19,7 @@ class Chat{
     return messages.map((e) => e.render(0)).toList();
   }
 
-  addMessage(ChatMessage message){
+  addMessage(ChatMessage message) {
     messages.add(message);
   }
 }
@@ -31,30 +30,29 @@ class ChatMessage {
   String messageType;
   void Function(ChatMessage) onTap;
 
-  ChatMessage(
-      {required this.messageContent,
-        required this.messageType,
-        required this.onTap,
-        this.leftSide = true});
+  ChatMessage({ required this.messageContent, required this.messageType, required this.onTap, this.leftSide = true });
 
   Widget render(double delay) {
     return FadeAnimation(
         delay,
         GestureDetector(
           onTap: (){
-            this.onTap;
+            onTap;
           },
           child: Container(
-            padding: this.leftSide ? EdgeInsets.only(left: 14, right: 80, top: 10, bottom: 10) : EdgeInsets.only(left: 80, right: 14, top: 10, bottom: 10),
+            padding: leftSide ? const EdgeInsets.only(left: 14, right: 80, top: 10, bottom: 10)
+                : const EdgeInsets.only(left: 80, right: 14, top: 10, bottom: 10),
             child: Align(
-              alignment: this.leftSide ? Alignment.topLeft : Alignment.topRight,
+              alignment: leftSide ? Alignment.topLeft : Alignment.topRight,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: this.leftSide ? kLeftChat : kChatThemeColor,
+                  color: leftSide ? kLeftChat : kChatThemeColor,
                 ),
-                padding: EdgeInsets.all(16),
-                child: this.leftSide ? Text('${messageContent}',style: TextStyle(fontSize: 15)) : Text('${messageContent}',style: TextStyle(color: Colors.white, fontSize: 15),),
+                padding: const EdgeInsets.all(16),
+                child: leftSide ? Text(messageContent,style: const TextStyle(fontSize: 15))
+                    : Text(messageContent,style: const TextStyle(color: Colors.white, fontSize: 15),
+                ),
               ),
             ),
           ),
@@ -73,7 +71,7 @@ class ChatMessagePromp extends ChatMessage {
   ChatMessagePromp({
     required super.messageContent,
     required super.messageType,
-    required List<ChatMessagePromptOptions> this.options, required super.onTap
+    required this.options, required super.onTap
   });
 
   @override
@@ -85,22 +83,24 @@ class ChatMessagePromp extends ChatMessage {
         child: Container(
           width: double.infinity,
           // padding: this.checkCenter ? EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10) : EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
-          padding: EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20),),
+              topLeft: Radius.circular(20), topRight: Radius.circular(20),
+            ),
             color: kLeftChat,
           ),
-          child: Text(this.messageContent, textAlign: TextAlign.center, style: TextStyle(fontSize: 15),),
+          child: Text(messageContent, textAlign: TextAlign.center, style: const TextStyle(fontSize: 15),),
         ),
       ),
-      Divider(height: 3,)];
+      const Divider(height: 3,),
+    ];
     children.addAll(options.map((e) => e.render()));
     return FadeAnimation(delay,
         Container(
           width: double.infinity,
           // padding: this.checkCenter ? EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10) : EdgeInsets.only(left: 80, right: 14, top: 10, bottom: 10),
-          padding: EdgeInsets.only(left: 80, right: 14, top: 10, bottom: 10),
+          padding: const EdgeInsets.only(left: 80, right: 14, top: 10, bottom: 10),
           child: Align(
             // alignment: this.checkCenter ? Alignment.center : Alignment.topRight,
             alignment: Alignment.topRight,
@@ -130,11 +130,11 @@ class ChatMessagePromptOptions{
   ChatMessagePromptOptions({required this.option, required this.prompt, required this.onTap, required this.confirmMessage});
   Widget render (){
     return FadeAnimation(2, Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 10),
       child: GestureDetector(
-        onTap: () => this.onTap(this.confirmMessage),
+        onTap: () => onTap(confirmMessage),
         // child: this.checkCen.checkCenter ? Text("$option) $prompt", style: TextStyle(fontSize: 15, color: Colors.green),) : Text("$option) $prompt", style: TextStyle(fontSize: 15, color: kThemeColor),),
-        child: Text("$option) $prompt", style: TextStyle(fontSize: 15, color: kThemeColor),),
+        child: Text("$option) $prompt", style: const TextStyle(fontSize: 15, color: kThemeColor),),
       ),
     ));
   }
@@ -148,15 +148,16 @@ class StoryContainer extends ChatMessage{
     required super.onTap
   });
 
+  @override
   Widget render(double delay) {
     return FadeAnimation(
         delay,
         GestureDetector(
-          onTap: (){
-            this.onTap;
+          onTap: () {
+            onTap;
           },
           child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             child: Align(
               alignment: Alignment.center,
               child: Container(
@@ -164,8 +165,10 @@ class StoryContainer extends ChatMessage{
                 //   borderRadius: BorderRadius.circular(20),
                 //   color: Colors.green,
                 // ),
-                padding: EdgeInsets.all(16),
-                child: Text('${messageContent}',style: TextStyle(color: Colors.black, fontSize: 15),),
+                padding: const EdgeInsets.all(16),
+                child: Text(messageContent,
+                  style: const TextStyle(color: Colors.black, fontSize: 15),
+                ),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:animalogy/ThemeColor.dart';
 import 'package:flutter/material.dart';
 import 'package:animalogy/Home/HomePage.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../UserDataModel.dart';
 
@@ -14,6 +15,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
   late double width;
   late double height;
 
@@ -31,12 +33,22 @@ class _FirstPageState extends State<FirstPage> {
   @override
   void initState() {
     super.initState();
+
     //  storing to localdata
     storePageData();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     nameController.dispose();
     super.dispose();
   }
@@ -47,82 +59,64 @@ class _FirstPageState extends State<FirstPage> {
     height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFf9f5f1),
+          backgroundColor: const Color(0xFFf9f5f1),
           elevation: 0,
         ),
-        backgroundColor: Color(0xFFf9f5f1),
+        backgroundColor: const Color(0xFFf9f5f1),
         body: SingleChildScrollView(
-          child: Center(
+       //   child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 50,
-                ),
-                Text(
+                const SizedBox(height: 50,),
+                const Text(
                   "Welcome to Animalogy!",
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: kPurpleColor),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Image.asset(
-                  'assets/wow-image.png',
-                  width: 400.0,
-                  height: 200.0,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
+                const SizedBox(height: 20,),
+                Image.asset('assets/wow-image.png', width: 400.0, height: 200.0,),
+                const SizedBox(height: 30,),
+                const Text(
                   "Enter your Name...",
                   style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,
                       color: kPurpleColor),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10,),
                 Padding(
-                  padding: EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: TextField(
                     controller: nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Your name',
                     ),
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20,),
                 InkWell(
                     onTap: () {
                       userDataModel.setUsername(nameController.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomePage(nameController.text)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(nameController.text)));
                     },
                     borderRadius: BorderRadius.circular(30),
                     splashColor: kThemeColor,
                     child: Container(
                       height: 50,
                       width: 120,
-                      padding: EdgeInsets.only(
-                          left: 10, right: 10, top: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kYellowColor,
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Text(
                             'Next',
                             style: TextStyle(
@@ -137,10 +131,12 @@ class _FirstPageState extends State<FirstPage> {
                           ),
                         ],
                       ),
-                    )),
+                    )
+                ),
               ],
             ),
-          ),
-        ));
+        //  ),
+        )
+    );
   }
 }

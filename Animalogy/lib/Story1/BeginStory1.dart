@@ -46,96 +46,93 @@ class _BeginStoryP1State extends State<BeginStoryP1> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar (
           backgroundColor: Colors.white,
           elevation: 0,
-          title: Text("Story"),
+          title: const Text("Story"),
         ),
         body: Padding(
-          padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("Let's begin with", textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),),
-              SizedBox(height: 5,),
-              Text("Story 1!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
-              SizedBox(height: 30,),
+              const Text("Let's begin with",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              const SizedBox(height: 5,),
+              const Text("Story 1!",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              const SizedBox(height: 30,),
               Container(
-                  padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: kChatThemeColor,
                   ),
                   child: Column(
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Let's meet our first character and learn about her life and background!",
                         style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       InkWell(
                           onTap: () {
                             print("pressed!");
-                            Navigator.push(context,
-                                new MaterialPageRoute(builder: (context) => StoryFirst()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryFirst()));
                           },
                           child: Container(
                             height: 50,
                             width: 200,
-                            padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                            padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 color: kYellowColor
                             ),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   "Let's Begin",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20
-                                  ),
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                                 ),
                                 SizedBox(width: 12,),
                                 Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
                               ],
                             ),
-                          )
+                          ),
                       ),
                     ],
                   )
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               InkWell(
                   onTap: () {
                     print("pressed!");
-                    Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => NavigationPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationPage()));
                   },
                   child: Center(
                     child: Container(
                       height: 50,
                       width: 200,
-                      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kYellowColor
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            "Dashboard",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
-                            ),
+                          Text("Dashboard",
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                           SizedBox(width: 12,),
                           Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)

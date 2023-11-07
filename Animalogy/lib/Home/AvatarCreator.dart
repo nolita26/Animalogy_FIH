@@ -24,7 +24,7 @@ class _AvatarCreatorState extends State<AvatarCreator> {
 
   @override
   void initState() {
-    _controller = ConfettiController(duration: const Duration(seconds: 4));
+    _controller = ConfettiController(duration: const Duration(seconds: 3));
     _controller.play();
     super.initState();
 
@@ -52,18 +52,16 @@ class _AvatarCreatorState extends State<AvatarCreator> {
             iconSize: 22.0,
             color: Colors.black,
             onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Dashboard()));
             },
           ),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.save, color: Colors.black,),
+            icon: const Icon(Icons.save, color: Colors.black,),
             onPressed: () {
               _controller.play();
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Dashboard()));
             },
           ),
         ],

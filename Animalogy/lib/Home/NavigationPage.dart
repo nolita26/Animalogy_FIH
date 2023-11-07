@@ -32,12 +32,14 @@ class _NavigationPageState extends State<NavigationPage> {
   void initState() {
     super.initState();
     widget.username = userDataModel.getUsername();
+
+    //  storing to localdata
+    storePageData();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    //  storing to localdata
-    storePageData();
   }
 
   @override
@@ -56,10 +58,10 @@ class _NavigationPageState extends State<NavigationPage> {
     height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFf9f5f1),
+          backgroundColor: const Color(0xFFf9f5f1),
           elevation: 0,
         ),
-        backgroundColor: Color(0xFFf9f5f1),
+        backgroundColor: const Color(0xFFf9f5f1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -75,89 +77,108 @@ class _NavigationPageState extends State<NavigationPage> {
                     child: Container(
                       height: 60,
                       width: 200,
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kYellowColor,
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Icon(Icons.home, color: Colors.white, size: 32,),
                           SizedBox(width: 15),
-                          Text('Home   ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),),
+                          Text('Home   ',
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
                         ],
-                      ))),
-                SizedBox(height: 20),
+                      ),
+                    ),
+                ),
+                const SizedBox(height: 20),
                 InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => BeginStoryP1()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP1()));
                     },
                     borderRadius: BorderRadius.circular(30),
                     splashColor: kThemeColor,
                     child: Container(
                         height: 60,
                         width: 200,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kChatThemeColor,
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Icon(Icons.arrow_circle_right_rounded, color: Colors.white, size: 32,),
                             SizedBox(width: 15),
-                            Text('Story 1', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),),
+                            Text('Story 1',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
                           ],
-                        ))),
-                SizedBox(height: 20),
+                        ),
+                    ),
+                ),
+                const SizedBox(height: 20),
                 InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => BeginStoryP2()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP2()));
                     },
                     borderRadius: BorderRadius.circular(30),
                     splashColor: kThemeColor,
                     child: Container(
                         height: 60,
                         width: 200,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kYellowColor,
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Icon(Icons.arrow_circle_right_rounded, color: Colors.white, size: 32,),
                             SizedBox(width: 15),
-                            Text('Story 2', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),),
+                            Text('Story 2',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
                           ],
-                        ))),
-                SizedBox(height: 20),
+                        ),
+                    ),
+                ),
+                const SizedBox(height: 20),
                 InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => BeginStoryP3()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP3()));
                     },
                     borderRadius: BorderRadius.circular(30),
                     splashColor: kThemeColor,
                     child: Container(
                         height: 60,
                         width: 200,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kChatThemeColor,
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Icon(Icons.arrow_circle_right_rounded, color: Colors.white, size: 32,),
                             SizedBox(width: 15),
-                            Text('Story 3', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),),
+                            Text('Story 3',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
                           ],
-                        ))),
+                        ),
+                    ),
+                ),
               ],
-            ))));
+            ),
+          ),
+        ),
+    );
   }
 }

@@ -17,20 +17,29 @@ dependencies:
   just_audio: ^0.9.34
   shared_preferences: ^2.0.18
   sizer: ^2.0.15
-  flutter_screenutil: ^5.7.0
+  flutter_screenutil: ^5.9.0
   simple_animations: ^5.0.2
   provider: ^6.0.0
   animated_text_kit: ^4.2.1
+  device_preview: ^1.1.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icon.png"
+  min_sdk_android: 21
+
 flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/app_icon.png
     - assets/audio/
     - assets/Backgrounds/
     - assets/Drongo/
