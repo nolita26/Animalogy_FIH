@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:animalogy/Story3/BeginStory3.dart';
 import 'package:animalogy/Story3/ChatMessageModel.dart';
 import 'package:animalogy/Story3/DarkPage.dart';
@@ -27,6 +28,8 @@ class _ChatPageState extends State<ChatPage> {
   // int conversationCount = 0;
   Chat chat = Chat([]);
   List<List<ChatMessagePromptOptions>> allOptions = [];
+
+  final ScrollController _scrollController = ScrollController();
 
   void send() {
     setState(() {
@@ -413,7 +416,12 @@ class _ChatPageState extends State<ChatPage> {
         onTap: setMessage,
       ),
     ]);
+
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+    });
   }
 
   Future<void> storePageData() async {
@@ -622,6 +630,18 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
+  // Function to scroll to the bottom of the chat.
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final scrollController = Scrollable.of(context);
+      scrollController.position.ensureVisible(
+        (chat.messages.isNotEmpty ? chat.messages.length - 1 : 0) as RenderObject,
+        alignment: 1.0,
+        duration: Duration(milliseconds: 300),
+      );
+    });
+  }
+
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations([
@@ -683,9 +703,12 @@ class _ChatPageState extends State<ChatPage> {
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(
+              reverse: true,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 80),
-                child: Column(children: chat.render()),
+                child: Column(
+                    children: chat.render()
+                ),
               )
           ),
           Align(
