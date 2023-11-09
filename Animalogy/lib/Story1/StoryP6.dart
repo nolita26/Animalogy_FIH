@@ -65,7 +65,7 @@ class _StoryP6State extends State<StoryP6> with TickerProviderStateMixin {
               child: const Text('No'),
             ),
             GestureDetector(
-              onTap: () => Navigator.of(context).pop(true),
+              onTap: () => SystemNavigator.pop(),
               child: const Text('Yes'),
             ),
           ],
@@ -121,7 +121,7 @@ class _StoryP6State extends State<StoryP6> with TickerProviderStateMixin {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return WillPopScope(
-        onWillPop: _onBackPressed,
+      onWillPop: _onBackPressed,
       child: Scaffold(
         backgroundColor: const Color(0xFFe9b86d),
         body: Column(
@@ -163,9 +163,8 @@ class _StoryP6State extends State<StoryP6> with TickerProviderStateMixin {
                             });
                             playPause();
                           },
-                          icon: playing
-                              ? const Icon(Icons.pause, size: 35, color: Colors.white,)
-                              : const Icon(Icons.play_arrow, size: 35, color: Colors.white,)
+                          icon: playing ? Visibility( visible: !playing, child: const Icon(Icons.pause, size: 50, color: Colors.white,))
+                              : Visibility( visible: !playing, child: const Icon(Icons.play_arrow, size: 50, color: Colors.white,))
                       ),
                     ),
                     Align(

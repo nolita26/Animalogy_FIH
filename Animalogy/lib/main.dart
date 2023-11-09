@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       currentPage = action;
     });
-    if(currentPage == 'firstPage'){
+    if (currentPage == 'firstPage') {
       setState(() {
       showPage = const FirstPage();
       });

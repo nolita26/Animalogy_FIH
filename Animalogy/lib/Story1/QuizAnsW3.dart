@@ -40,6 +40,27 @@ class _QuizAnsW3State extends State<QuizAnsW3> {
     print(action);
   }
 
+  Future<bool> _onBackPressed() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('Do you want to exit the app?'),
+          actions: <Widget> [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            GestureDetector(
+              onTap: () => SystemNavigator.pop(),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+  }
+
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations([
@@ -53,122 +74,124 @@ class _QuizAnsW3State extends State<QuizAnsW3> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: kContainerColor,
-      body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context,
-                MaterialPageRoute(builder: (context) => const StoryP5()));
-          },
-          child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * 0.08,),
-                  const Text("Correct Answer!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 30,),
-                  Image.asset('assets/Map.png', fit: BoxFit.fill,),
-                  const SizedBox(height: 30,),
-                  const Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
-                  const SizedBox(height: 15,),
-                  Row(
-                    children: [
-                      const Spacer(flex: 2),
-                      Expanded(
-                        flex: 4,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.white,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        backgroundColor: kContainerColor,
+        body: SingleChildScrollView(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => const StoryP5()));
+            },
+            child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: height * 0.08,),
+                    const Text("Correct Answer!", style: TextStyle(fontSize: 35, color: kPurpleColor, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 30,),
+                    Image.asset('assets/Map.png', fit: BoxFit.fill,),
+                    const SizedBox(height: 30,),
+                    const Text("Which region is Meerkat from?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
+                    const SizedBox(height: 15,),
+                    Row(
+                      children: [
+                        const Spacer(flex: 2),
+                        Expanded(
+                          flex: 4,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.white,
+                            ),
+                            child: const Text("Region 1", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW1()));
+                            },
                           ),
-                          child: const Text("Region 1", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW1()));
-                          },
                         ),
-                      ),
-                      const Spacer(flex: 2),
-                    ],
-                  ),
-                  const SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      const Spacer(flex: 2),
-                      Expanded(
-                        flex: 4,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.green,
-                          ),
-                          child: const Text("Region 2", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryQuizAns()));
-                          },
-                        ),
-                      ),
-                      const Spacer(flex: 2),
-                    ],
-                  ),
-                  const SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      const Spacer(flex: 2),
-                      Expanded(
-                        flex: 4,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.red,
-                          ),
-                          child: const Text("Region 3", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW3()));
-                          },
-                        ),
-                      ),
-                      const Spacer(flex: 2),
-                    ],
-                  ),
-                  const SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      const Spacer(flex: 2),
-                      Expanded(
-                        flex: 4,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.white,
-                          ),
-                          child: const Text("Region 4", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW4()));
-                          },
-                        ),
-                      ),
-                      const Spacer(flex: 2),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP2()));
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('Next',
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        SizedBox(width: 10),
-                        Icon(Icons.arrow_forward_rounded, color: Colors.black,),
+                        const Spacer(flex: 2),
                       ],
                     ),
-                  ),
-                ],
-              )
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        const Spacer(flex: 2),
+                        Expanded(
+                          flex: 4,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.green,
+                            ),
+                            child: const Text("Region 2", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryQuizAns()));
+                            },
+                          ),
+                        ),
+                        const Spacer(flex: 2),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        const Spacer(flex: 2),
+                        Expanded(
+                          flex: 4,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.red,
+                            ),
+                            child: const Text("Region 3", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW3()));
+                            },
+                          ),
+                        ),
+                        const Spacer(flex: 2),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        const Spacer(flex: 2),
+                        Expanded(
+                          flex: 4,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.white,
+                            ),
+                            child: const Text("Region 4", style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.normal),),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizAnsW4()));
+                            },
+                          ),
+                        ),
+                        const Spacer(flex: 2),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP2()));
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Next',
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                          SizedBox(width: 10),
+                          Icon(Icons.arrow_forward_rounded, color: Colors.black,),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+            ),
           ),
         ),
       ),

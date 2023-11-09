@@ -22,14 +22,10 @@ class _ChatPageState extends State<ChatPage> {
   late double height;
   late AudioPlayer player;
   bool playing = false;
-
   final String _user = "Jack";
   final String _message = "";
-  // int conversationCount = 0;
   Chat chat = Chat([]);
   List<List<ChatMessagePromptOptions>> allOptions = [];
-
-  final ScrollController _scrollController = ScrollController();
 
   void send() {
     setState(() {
@@ -80,7 +76,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     widget.username = userDataModel.getUsername();
     player = AudioPlayer();
     play();
@@ -417,8 +413,6 @@ class _ChatPageState extends State<ChatPage> {
       ),
     ]);
 
-    super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToBottom();
     });
@@ -429,6 +423,27 @@ class _ChatPageState extends State<ChatPage> {
     await prefs.setString('currentPage', 'chatPage');
     final String? action = prefs.getString('currentPage');
     print(action);
+  }
+
+  Future<bool> _onBackPressed() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('Do you want to exit the app?'),
+          actions: <Widget> [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            GestureDetector(
+              onTap: () => SystemNavigator.pop(),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
   }
 
   void setMessage(ChatMessage message) {
@@ -630,14 +645,13 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
-  // Function to scroll to the bottom of the chat.
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final scrollController = Scrollable.of(context);
       scrollController.position.ensureVisible(
         (chat.messages.isNotEmpty ? chat.messages.length - 1 : 0) as RenderObject,
         alignment: 1.0,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
       );
     });
   }
@@ -655,109 +669,112 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        flexibleSpace: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.only(right: 16),
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP3()));
-                  },
-                  icon: const Icon(Icons.arrow_back_ios, color: kChatThemeColor,),
-                ),
-                const SizedBox(width: 2,),
-                const CircleAvatar(
-                  backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
-                  maxRadius: 20,
-                ),
-                const SizedBox(width: 12,),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(_user,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 6,),
-                      Text("Online",
-                        style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
-                      ),
-                    ],
-                  ),
-                ),
-                const Icon(Icons.phone, color: kThemeCColor, size: 30,),
-                const SizedBox(width: 15,),
-                const Icon(Icons.videocam_rounded, color: kThemeCColor, size: 30,),
-              ],
-            ),
-          ),
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-              reverse: true,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 80),
-                child: Column(
-                    children: chat.render()
-                ),
-              )
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          flexibleSpace: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-              height: 60,
-              width: double.infinity,
-              color: Colors.white,
+              padding: const EdgeInsets.only(right: 16),
               child: Row(
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Icon(Icons.add, color: Colors.white, size: 20,),
-                    ),
-                  ),
-                  const SizedBox(width: 15,),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {
-                        // setMessage(value);
-                      },
-                      decoration: const InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  const SizedBox(width: 15,),
-                  FloatingActionButton(
+                  IconButton(
                     onPressed: () {
-                      send();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP3()));
                     },
-                    backgroundColor: Colors.black,
-                    elevation: 0,
-                    child: const Icon(Icons.send, color: Colors.white, size: 18,),
+                    icon: const Icon(Icons.arrow_back_ios, color: kChatThemeColor,),
                   ),
+                  const SizedBox(width: 2,),
+                  const CircleAvatar(
+                    backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
+                    maxRadius: 20,
+                  ),
+                  const SizedBox(width: 12,),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(_user,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 6,),
+                        Text("Online",
+                          style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(Icons.phone, color: kThemeCColor, size: 30,),
+                  const SizedBox(width: 15,),
+                  const Icon(Icons.videocam_rounded, color: kThemeCColor, size: 30,),
                 ],
               ),
             ),
           ),
-        ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+                reverse: true,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 80),
+                  child: Column(
+                      children: chat.render()
+                  ),
+                )
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
+                height: 60,
+                width: double.infinity,
+                color: Colors.white,
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Icon(Icons.add, color: Colors.white, size: 20,),
+                      ),
+                    ),
+                    const SizedBox(width: 15,),
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {
+                          // setMessage(value);
+                        },
+                        decoration: const InputDecoration(
+                            hintText: "Write message...",
+                            hintStyle: TextStyle(color: Colors.black54),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    const SizedBox(width: 15,),
+                    FloatingActionButton(
+                      onPressed: () {
+                        send();
+                      },
+                      backgroundColor: Colors.black,
+                      elevation: 0,
+                      child: const Icon(Icons.send, color: Colors.white, size: 18,),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

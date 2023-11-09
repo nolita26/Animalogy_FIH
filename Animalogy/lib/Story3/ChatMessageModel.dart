@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:animalogy/FadeAnimation.dart';
 import 'package:animalogy/ThemeColor.dart';
 
-class Chat{
+class Chat {
   List<ChatMessage> messages;
   Chat(this.messages);
   bool firstRender = true;
 
   List<Widget> render() {
     double delay = 1;
-    if(firstRender) {
+    if (firstRender) {
       firstRender = false;
       return messages.map((e) {
         delay++;
@@ -33,8 +33,7 @@ class ChatMessage {
   ChatMessage({ required this.messageContent, required this.messageType, required this.onTap, this.leftSide = true });
 
   Widget render(double delay) {
-    return FadeAnimation(
-        delay,
+    return FadeAnimation(delay,
         GestureDetector(
           onTap: (){
             onTap;
@@ -59,10 +58,7 @@ class ChatMessage {
         )
     );
   }
-
 }
-
-
 
 class ChatMessagePromp extends ChatMessage {
   List<ChatMessagePromptOptions> options;
@@ -120,27 +116,31 @@ class ChatMessagePromp extends ChatMessage {
   }
 }
 
-class ChatMessagePromptOptions{
+class ChatMessagePromptOptions {
   String option;
   String prompt;
   ChatMessage confirmMessage;
-  // ChatMessagePromp checkCen;
   void Function(ChatMessage) onTap;
-  // ChatMessagePromptOptions({required this.option, required this.prompt, required this.checkCen, required this.onTap, required this.confirmMessage});
+
   ChatMessagePromptOptions({required this.option, required this.prompt, required this.onTap, required this.confirmMessage});
-  Widget render (){
-    return FadeAnimation(2, Container(
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 10),
-      child: GestureDetector(
-        onTap: () => onTap(confirmMessage),
-        // child: this.checkCen.checkCenter ? Text("$option) $prompt", style: TextStyle(fontSize: 15, color: Colors.green),) : Text("$option) $prompt", style: TextStyle(fontSize: 15, color: kThemeColor),),
-        child: Text("$option) $prompt", style: const TextStyle(fontSize: 15, color: kThemeColor),),
-      ),
-    ));
+
+  Widget render () {
+    return FadeAnimation(2,
+        Container(
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 10),
+          child: GestureDetector(
+            onTap: () => onTap(confirmMessage),
+            // child: this.checkCen.checkCenter ? Text("$option) $prompt", style: TextStyle(fontSize: 15, color: Colors.green),) : Text("$option) $prompt", style: TextStyle(fontSize: 15, color: kThemeColor),),
+            child: Text("$option) $prompt",
+              style: const TextStyle(fontSize: 15, color: kThemeColor),
+            ),
+          ),
+        ),
+    );
   }
 }
 
-class StoryContainer extends ChatMessage{
+class StoryContainer extends ChatMessage {
 
   StoryContainer({
     required super.messageContent,
@@ -150,8 +150,7 @@ class StoryContainer extends ChatMessage{
 
   @override
   Widget render(double delay) {
-    return FadeAnimation(
-        delay,
+    return FadeAnimation(delay,
         GestureDetector(
           onTap: () {
             onTap;
@@ -175,5 +174,4 @@ class StoryContainer extends ChatMessage{
         )
     );
   }
-
 }

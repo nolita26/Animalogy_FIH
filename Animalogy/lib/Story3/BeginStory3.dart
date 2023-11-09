@@ -37,6 +37,27 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
     print(action);
   }
 
+  Future<bool> _onBackPressed() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('Do you want to exit the app?'),
+          actions: <Widget> [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            GestureDetector(
+              onTap: () => SystemNavigator.pop(),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+  }
+
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations([
@@ -48,94 +69,97 @@ class _BeginStoryP3State extends State<BeginStoryP3> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar (
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text("Story"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text("Let's begin with", textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),),
-              const SizedBox(height: 5,),
-              const Text("Story 3!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
-              const SizedBox(height: 20,),
-              Container(
-                  padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: kChatThemeColor,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      const Text("Someone sends you a message on Facebook. You don’t know them and have never seen them, but they claim to be from your neighborhood. They explain they are a Tik Tok influencer and would like to invite you to have you in their next dance video.",
-                        style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(height: 20,),
-                      InkWell(
-                          onTap: () {
-                            print("pressed!");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
-                          },
-                          child: Container(
-                            height: 50,
-                            width: 200,
-                            padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: kYellowColor
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Let's Begin",
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                                ),
-                                SizedBox(width: 12,),
-                                Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
-                              ],
-                            ),
-                          ),
-                      ),
-                    ],
-                  )
-              ),
-              const SizedBox(height: 20),
-              InkWell(
-                  onTap: () {
-                    print("pressed!");
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationPage()));
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 50,
-                      width: 200,
-                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: kYellowColor
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Dashboard",
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                          SizedBox(width: 12,),
-                          Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
-                        ],
-                      ),
-                    ),
-                  )
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+          appBar: AppBar (
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text("Story"),
           ),
-        )
+          body: Padding(
+            padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text("Let's begin with", textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),),
+                const SizedBox(height: 5,),
+                const Text("Story 3!", textAlign: TextAlign.start, style: TextStyle(color: kChatThemeColor, fontWeight: FontWeight.bold, fontSize: 30),),
+                const SizedBox(height: 20,),
+                Container(
+                    padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: kChatThemeColor,
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        const Text("Someone sends you a message on Facebook. You don’t know them and have never seen them, but they claim to be from your neighborhood. They explain they are a Tik Tok influencer and would like to invite you to have you in their next dance video.",
+                          style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(height: 20,),
+                        InkWell(
+                            onTap: () {
+                              print("pressed!");
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 200,
+                              padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: kYellowColor
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Let's Begin",
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                                  ),
+                                  SizedBox(width: 12,),
+                                  Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
+                                ],
+                              ),
+                            ),
+                        ),
+                      ],
+                    )
+                ),
+                const SizedBox(height: 20),
+                InkWell(
+                    onTap: () {
+                      print("pressed!");
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationPage()));
+                    },
+                    child: Center(
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: kYellowColor
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Dashboard",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            SizedBox(width: 12,),
+                            Icon(Icons.arrow_circle_right, color: Colors.white, size: 32,)
+                          ],
+                        ),
+                      ),
+                    )
+                ),
+              ],
+            ),
+          )
+      ),
     );
   }
 }

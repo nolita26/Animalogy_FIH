@@ -42,6 +42,27 @@ class _StoryP2State extends State<StoryP2> {
     print(action);
   }
 
+  Future<bool> _onBackPressed() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('Do you want to exit the app?'),
+          actions: <Widget> [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            GestureDetector(
+              onTap: () => SystemNavigator.pop(),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+  }
+
   Future<void> play() async {
     await player.setAsset(
         'assets/audio/4.m4a');
@@ -90,73 +111,74 @@ class _StoryP2State extends State<StoryP2> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: const Color(0xFFd0b78d),
-      body:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Stack(children: <Widget>[
-              const Center(
-                child: Image(
-                    image: AssetImage('assets/Backgrounds/4.png'),
-                    alignment: Alignment.center,
-                    fit: BoxFit.cover
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      isSelected: standardSelected,
-                      icon: const Icon(Icons.arrow_back_ios_outlined, color: Colors.white, size: 35,),
-                      onPressed: () {
-                        setState(() {
-                          standardSelected = !standardSelected;
-                        });
-                        pause();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryP1()));
-                      },
-                    ),
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        backgroundColor: const Color(0xFFd0b78d),
+        body:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Stack(children: <Widget>[
+                const Center(
+                  child: Image(
+                      image: AssetImage('assets/Backgrounds/4.png'),
+                      alignment: Alignment.center,
+                      fit: BoxFit.cover
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: IconButton(
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
                         isSelected: standardSelected,
-                        onPressed: () async {
+                        icon: const Icon(Icons.arrow_back_ios_outlined, color: Colors.white, size: 35,),
+                        onPressed: () {
                           setState(() {
                             standardSelected = !standardSelected;
                           });
-                          playPause();
+                          pause();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryP1()));
                         },
-                        icon: playing
-                            ? const Icon(Icons.pause, size: 35, color: Colors.white,)
-                            : const Icon(Icons.play_arrow, size: 35, color: Colors.white,
-                        )
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      isSelected: standardSelected,
-                      hoverColor: Colors.black.withOpacity(0.8),
-                      icon: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 35,),
-                      onPressed: () {
-                        setState(() {
-                          standardSelected = !standardSelected;
-                        });
-                        pause();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryP3()));
-                      },
+                    Align(
+                      alignment: Alignment.center,
+                      child: IconButton(
+                          isSelected: standardSelected,
+                          onPressed: () async {
+                            setState(() {
+                              standardSelected = !standardSelected;
+                            });
+                            playPause();
+                          },
+                          icon: playing ? Visibility( visible: !playing, child: const Icon(Icons.pause, size: 50, color: Colors.white,))
+                              : Visibility( visible: !playing, child: const Icon(Icons.play_arrow, size: 50, color: Colors.white,))
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ]),
-          ),
-        ],
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        isSelected: standardSelected,
+                        hoverColor: Colors.black.withOpacity(0.8),
+                        icon: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 35,),
+                        onPressed: () {
+                          setState(() {
+                            standardSelected = !standardSelected;
+                          });
+                          pause();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const StoryP3()));
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+          ],
+        ),
       ),
     );
   }
