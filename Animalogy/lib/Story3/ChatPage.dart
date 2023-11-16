@@ -22,10 +22,12 @@ class _ChatPageState extends State<ChatPage> {
   late double height;
   late AudioPlayer player;
   bool playing = false;
+  bool _needScroll = false;
   final String _user = "Jack";
   final String _message = "";
   Chat chat = Chat([]);
   List<List<ChatMessagePromptOptions>> allOptions = [];
+  final ScrollController _scrollController = ScrollController();
 
   void send() {
     setState(() {
@@ -85,10 +87,7 @@ class _ChatPageState extends State<ChatPage> {
     //  storing to localdata
     storePageData();
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     allOptions = [
       [
@@ -412,10 +411,6 @@ class _ChatPageState extends State<ChatPage> {
         onTap: setMessage,
       ),
     ]);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToBottom();
-    });
   }
 
   Future<void> storePageData() async {
@@ -451,6 +446,7 @@ class _ChatPageState extends State<ChatPage> {
       // conversationCount++;
       chat.messages.add(message);
       play();
+      _needScroll = true;
     });
     if(message.messageType == "A1") {
       play();
@@ -641,18 +637,14 @@ class _ChatPageState extends State<ChatPage> {
     //   chat.messages.addAll(newMessages);}
      else if (message.messageType == "D2" || message.messageType == "D3" || message.messageType == "E") {
        pause();
-       shackle();
+       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DarkPage()));
+       // shackle();
     }
   }
 
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final scrollController = Scrollable.of(context);
-      scrollController.position.ensureVisible(
-        (chat.messages.isNotEmpty ? chat.messages.length - 1 : 0) as RenderObject,
-        alignment: 1.0,
-        duration: const Duration(milliseconds: 300),
-      );
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
     });
   }
 
@@ -667,6 +659,10 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (_needScroll) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+      _needScroll = false;
+    }
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return WillPopScope(
@@ -683,15 +679,12 @@ class _ChatPageState extends State<ChatPage> {
                 children: <Widget>[
                   IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BeginStoryP3()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const BeginStoryP3()));
                     },
                     icon: const Icon(Icons.arrow_back_ios, color: kChatThemeColor,),
                   ),
                   const SizedBox(width: 2,),
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
-                    maxRadius: 20,
-                  ),
+                  const CircleAvatar(backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"), maxRadius: 20,),
                   const SizedBox(width: 12,),
                   Expanded(
                     child: Column(
@@ -699,8 +692,7 @@ class _ChatPageState extends State<ChatPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(_user,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                        ),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
                         const SizedBox(height: 6,),
                         Text("Online",
                           style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
@@ -719,13 +711,11 @@ class _ChatPageState extends State<ChatPage> {
         body: Stack(
           children: <Widget>[
             SingleChildScrollView(
-                reverse: true,
+              controller: _scrollController,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 80),
-                  child: Column(
-                      children: chat.render()
-                  ),
-                )
+                  child: Column(children: chat.render()),
+                ),
             ),
             Align(
               alignment: Alignment.bottomLeft,

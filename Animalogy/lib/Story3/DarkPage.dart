@@ -84,70 +84,63 @@ class _DarkPageState extends State<DarkPage> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        body: Center(
-          child: Flexible(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  child: const Image(
-                    image: AssetImage('assets/Backgrounds/dark_room.png'),
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(28, 100, 28, 250),
-                    child: Container(
-                      color: Colors.transparent, // Change the color as desired
-                      child: Center(
-                        child: TypewriterAnimatedTextKit(
-                          text: const ['When your friend reach the house, they got drugged and kidnapped. You never heard from them again!'],
-                          textStyle: const TextStyle(fontSize: 22.5, color: Colors.white, fontWeight: FontWeight.w600,),
-                          textAlign: TextAlign.center,
-                          speed: const Duration(milliseconds: 100),
-                          /*totalRepeatCount: 1,*/
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0, 0.7),
-                  child: InkWell(
-                      onTap: () {
-                        pause();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
-                      },
-                      borderRadius: BorderRadius.circular(30),
-                      splashColor: kThemeColor,
-                    child: Container(
-                      height: 50,
-                      width: 120,
-                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.black,
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.arrow_back_outlined, color: Colors.white,),
-                          SizedBox(width: 10),
-                          Text('Back',
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+        body: Stack(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              child: const Image(
+                image: AssetImage('assets/Backgrounds/dark_room.png'),
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
+            Center(
+              child: Padding(padding: const EdgeInsets.fromLTRB(28, 100, 28, 250),
+                child: Container(
+                  color: Colors.transparent, // Change the color as desired
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      RotateAnimatedText(
+                        'When your friend reach the house, they got drugged and kidnapped. You never heard from them again!',
+                        textStyle: const TextStyle(fontSize: 22.5, color: Colors.red, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                    isRepeatingAnimation: true,
+                    totalRepeatCount: 50,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0.7),
+              child: InkWell(
+                onTap: () {
+                  pause();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
+                  },
+                borderRadius: BorderRadius.circular(30),
+                splashColor: kThemeColor,
+                child: Container(
+                  height: 50,
+                  width: 120,
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.black,),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.arrow_back_outlined, color: Colors.white,),
+                      SizedBox(width: 10),
+                      Text('Back',
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
